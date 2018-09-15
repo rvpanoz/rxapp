@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "concurrently --kill-others \"npm run httpServer\" \"npm run dev\"",
+    "start": "concurrently --kill-others \"npm run dev\"",
     "dev": "webpack-serve",
-    "httpServer": "node src/server.js",
+    "startServer": "node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.2",
+    "babel-polyfill": "^6.26.0",
     "concurrently": "^4.0.1",
     "css-loader": "^1.0.0",
     "express": "^4.16.3",
@@ -38,6 +39,7 @@
     "webpack-serve": "^2.0.2"
   },
   "dependencies": {
+    "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",

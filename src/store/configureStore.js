@@ -3,7 +3,7 @@ import { createEpicMiddleware } from "redux-observable";
 import rootReducer from "../reducers";
 import initialState from "./initialState";
 
-// import { rootEpic } from "../actions";
+import { rootEpic } from "../epics";
 
 const epicMiddleware = createEpicMiddleware();
 
@@ -12,12 +12,12 @@ export default function configureStore(state = initialState) {
     rootReducer,
     state,
     compose(
-      // applyMiddleware(epicMiddleware),
+      applyMiddleware(epicMiddleware),
       window.__REDUX_DEVTOOLS_EXTENSION__ &&
         window.__REDUX_DEVTOOLS_EXTENSION__()
     )
   );
 
-  // epicMiddleware.run(rootEpic);
+  epicMiddleware.run(rootEpic);
   return store;
 }
