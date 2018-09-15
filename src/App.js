@@ -1,9 +1,10 @@
 import React from "react";
+import { TodosListContainer } from "./containers";
 
 const App = props => {
   return (
     <div id="app">
-      <h2>a Silly app</h2>
+      <TodosListContainer />
     </div>
   );
 };
