@@ -1,4 +1,4 @@
-# rxapp - Simple Todo app using redux-observable
+# rxapp - Simple Todo app using redux-observable and rxjs
 
 
 install application dependencies:
