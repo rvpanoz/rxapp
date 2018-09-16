@@ -1,7 +1,9 @@
 import {
   ADD_TODO,
   FETCH_TODOS_START,
-  FETCH_TODOS_SUCCESS
+  FETCH_TODOS_SUCCESS,
+  FETCH_TODOS_ERROR,
+  TODOS_FILTERED
 } from "../actions/types";
 import initialState from "../store/initialState";
 import { identity, assoc, propOr, prop, merge } from "ramda";
@@ -14,7 +16,14 @@ const handlers = {
     merge(state, {
       loading: action.loading,
       todos: action.todos
-    })
+    }),
+  [FETCH_TODOS_ERROR]: (state, action) =>
+    merge(state, {
+      loading: false,
+      todos: [],
+      error: acttion.error
+    }),
+  [TODOS_FILTERED]: (state, action) => assoc("todos", action.todos, state)
 };
 
 const createReducer = (state, handlers) => (state = initialState, action) =>
