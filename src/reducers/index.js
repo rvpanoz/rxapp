@@ -21,7 +21,7 @@ const handlers = {
     merge(state, {
       loading: false,
       todos: [],
-      error: acttion.error
+      error: action.error
     }),
   [TODOS_FILTERED]: (state, action) => assoc("todos", action.todos, state)
 };

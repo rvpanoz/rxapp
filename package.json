@@ -21,6 +21,9 @@
     "url": "https://github.com/rvpanoz/rxapp/issues"
   },
   "homepage": "https://github.com/rvpanoz/rxapp#readme",
+  "resolutions": {
+    "**/rxjs": "6.3.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.1",
     "@babel/preset-env": "^7.0.0",

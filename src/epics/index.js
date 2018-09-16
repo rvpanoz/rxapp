@@ -1,13 +1,15 @@
 import config from "../config";
-import { combineEpics, ofType } from "redux-observable";
-import {
-  mapTo,
-  switchMap,
-  mergeMap,
-  filter,
-  from,
-  catchError
-} from "rxjs/operators";
+import { combineEpics } from "redux-observable";
+import { Observable, throwError, of } from "rxjs";
+import { ajax } from "rxjs/observable/dom/ajax";
+
+import { map, mapTo, switchMap, catchError } from "rxjs/operators";
+
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/mapTo";
+import "rxjs/add/operator/switchMap";
+
 import {
   FETCH_TODOS_ERROR,
   FETCH_TODOS_START,
@@ -16,21 +18,19 @@ import {
 
 const fetchTodosEpic = (action$, state) =>
   action$.ofType(FETCH_TODOS_START).pipe(
-    switchMap(async () => {
-      const response = await fetch(config.todosUrl);
-      const result = await response.json();
-
-      return {
-        type: FETCH_TODOS_SUCCESS,
-        todos: result.data
-      };
+    switchMap(() => {
+      return ajax.getJSON(config.todosUrl);
     }),
-    catchError(err => {
-      return {
+    map(response => ({
+      type: FETCH_TODOS_SUCCESS,
+      todos: response.data
+    })),
+    catchError(error =>
+      of({
         type: FETCH_TODOS_ERROR,
-        error: err
-      };
-    })
+        error
+      })
+    )
   );
 
 export const rootEpic = combineEpics(fetchTodosEpic);
