@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import TodosListItem from "./ListItem";
 
 class TodosList extends Component {
   render() {
     const { todos } = this.props;
 
-    return <h3>TOdos</h3>;
+    return (
+      <div className="tiles">
+        {todos &&
+          todos.map((todo, idx) => (
+            <TodosListItem key={`todo-${idx}`} todo={todo} />
+          ))}
+      </div>
+    );
   }
 }
 
