@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Loader from "../../components/common/loader";
 import TodosList from "../../components/todos/List";
 import { fetchTodos } from "../../actions";
 
@@ -22,6 +23,7 @@ class ListContainer extends Component {
   }
   render() {
     const { todos } = this.props;
+
     return <TodosList todos={todos} />;
   }
 }

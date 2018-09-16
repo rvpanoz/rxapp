@@ -1,83 +1,11 @@
 <html>
 
 <head>
-    <style type="text/css">
-        html {
-            -webkit-font-smoothing: antialiased;
-            font-size: 10px;
-            font-family: Roboto, sans-serif;
-            box-sizing: border-box
-        }
-
-        body {
-            background-color: #fc6e84;
-            font-size: 14px;
-            line-height: 1.4;
-            color: #595959
-        }
-
-        *,
-        :after,
-        :before {
-            box-sizing: inherit
-        }
-
-        .loader {
-            display: none;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            -ms-transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            width: 256px;
-        }
-
-        .loader>svg {
-            height: 100%;
-            width: 100%;
-        }
-
-        .logo path.path-1 {
-            -webkit-animation: move 3s infinite;
-            animation: move 3s infinite;
-            stroke-dasharray: 20;
-        }
-
-        @keyframes move {
-            0% {
-                /* stroke-dashoffset: 1000; */
-            }
-            25% {
-                transform: translateX(200px)
-            }
-            50% {
-                transform: translateX(400px)
-            }
-            65% {
-                /* transform: translateX(150px); */
-                transform: translateX(650px)
-            }
-            75% {
-                transform: translateX(0px);
-                transform: translateY(0px);
-                transform: rotateX(90deg);
-                stroke-dashoffset: 0;
-            }
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../node_modules/spectre.css/dist/spectre.css">
 </head>
 
 <body>
     <div id="root"></div>
-    <div class="loader">
-        <svg width="700px" height="700px" viewBox="0 0 700 700" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
-            <g class="logo">
-                <path d="M10 10 h 120 v 680 h -120 Z" stroke="black" stroke-width="4" class="path-1" fill="#FF0090">
-                </path>
-            </g>
-        </svg>
-    </div>
 </body>
 
 </html>
