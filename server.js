@@ -2,9 +2,25 @@ const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const app = express();
+<<<<<<< HEAD
 const port = process.env.PORT || 3001;
 const bodyParser = require("body-parser");
 const merge = require("ramda").merge;
+=======
+const mongoose = require("mongoose");
+const dbName = "xmongo_db";
+const mongodbUrl = `mongodb://rvpanoz:demo123@ds125402.mlab.com:25402/${dbName}`;
+
+mongoose
+  .connect(
+    mongodbUrl,
+    {
+      useNewUrlParser: true
+    }
+  )
+  .then(db => console.log("db connected"))
+  .catch(err => console.log(err));
+>>>>>>> EXP# working with mongoose
 
 //MIDDLEWARES
 
