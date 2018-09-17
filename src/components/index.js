@@ -1,3 +1,3 @@
-import TodosList from "./todos/List";
+import TodosList from "./todos/TodosList";
 
 export { TodosList };

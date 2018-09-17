@@ -7,7 +7,7 @@
     "build": "webpack",
     "start": "concurrently --kill-others \"npm run dev\"",
     "dev": "webpack-serve",
-    "startServer": "node src/server.js",
+    "startServer": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
