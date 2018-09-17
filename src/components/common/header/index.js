@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./styles.css";
 import Loader from "../loader";
 
-function Header(props) {
-  const { loading } = props;
-
+function Header({ loading }) {
   return (
     <header className="navbar">
       <section className="navbar-section">

@@ -10,20 +10,14 @@ import withFetchTodos from "./withFetchTodos";
 
 import { fetchTodosStart } from "../../actions";
 
-export class TodosList extends Component {
-  render() {
-    const { todos } = this.props;
-
-    return (
-      <div className="tiles">
-        {todos &&
-          todos.map((todo, idx) => (
-            <TodosListItem key={`todo-${idx}`} todo={todo} />
-          ))}
-      </div>
-    );
-  }
-}
+export const TodosList = ({ todos }) => (
+  <div className="tiles">
+    {todos &&
+      todos.map((todo, idx) => (
+        <TodosListItem key={`todo-${idx}`} todo={todo} />
+      ))}
+  </div>
+);
 
 export default compose(
   connect(
