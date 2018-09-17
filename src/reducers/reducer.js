@@ -12,12 +12,12 @@ import { identity, assoc, propOr, prop, merge } from "ramda";
 const handlers = {
   [addTodo.type]: (state, { payload: { todo }}) =>
     ({ ...state, todo }),
-  [fetchTodosStart.type]: (state, { payload: { loading } }) =>
-    ({ ...state, loading }),
-  [fetchTodosSuccess.type]: (state, { payload: { loading, todos }}) =>
-    ({ ...state, loading, todos }),
+  [fetchTodosStart.type]: (state) =>
+    ({ ...state, loading: true }),
+  [fetchTodosSuccess.type]: (state, { payload: { todos }}) =>
+    ({ ...state, loading: false, todos }),
   [fetchTodosError.type]: (state, { payload: { error }}) =>
-    ({ ...state, error,  todos: [], loading: false }),
+    ({ ...state, error, loading: false, todos: [] }),
   [todosFiltered.type]: (state, { payload: { todos }}) =>
     ({ ...state, todos }),
 };

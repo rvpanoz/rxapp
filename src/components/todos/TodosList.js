@@ -27,9 +27,9 @@ export class TodosList extends Component {
 
 export default compose(
   connect(
-    ({ loading, todos }) => ({ loading, todos }),
+    ({ loading, todos }) => ({ todos, loading }),
     dispatch => ({
-      fetchTodos: () => dispatch(fetchTodosStart({ loading: true })),
+      fetchTodos: () => dispatch(fetchTodosStart()),
     }),
   ),
   withFetchTodos,
