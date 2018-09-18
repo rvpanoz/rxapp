@@ -18,6 +18,7 @@ const fetchData = ({
 // for the course:
 // the code bellow is equivelant with the code above
 // ... explain in class
+// 
 // const fetchData = ({
 //   url,
 //   successActionCreator = noop,
