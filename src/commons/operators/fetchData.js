@@ -16,7 +16,7 @@ const fetchData = ({
   );
 
 // for the course:
-// the code bellosw is equivelant with the code above
+// the code bellow is equivelant with the code above
 // ... explain in class
 // const fetchData = ({
 //   url,
