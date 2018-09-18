@@ -1,3 +1,5 @@
+import { identity, assoc, propOr, prop, merge } from "ramda";
+
 import {
   addTodo,
   fetchTodosStart,
@@ -7,7 +9,6 @@ import {
 } from 'actions';
 
 import initialState from "./initialState";
-import { identity, assoc, propOr, prop, merge } from "ramda";
 
 const handlers = {
   [addTodo.type]: (state, { payload: { todo }}) =>
