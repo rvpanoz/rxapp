@@ -1,14 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { compose } from "redux";
 import { connect } from "react-redux";
 
-import { fetchTodosStart } from "models/todos/actions";
+import propsOf from "commons/propsOf";
 
 import {
   loading,
   todos,
+  fetchTodos,
 } from "models/todos/selectors";
 
 import TodosListItem from "./TodoListItem";
@@ -26,10 +27,16 @@ export const TodosList = ({ todos }) => (
 
 export default compose(
   connect(
-    state => ({ ...todos(state), ...loading(state) }),
-    dispatch => ({
-      fetchTodos: () => dispatch(fetchTodosStart()),
-    }),
+    propsOf({ todos, loading }),
+    propsOf({ fetchTodos }),
   ),
   withFetchTodos,
 )(TodosList);
+
+// export default compose(
+//   connect(
+//     state => ({ ...todos(state), ...loading(state) }),
+//     dispatch => ({ ...fetchTodos(dispatch) }),
+//   ),
+//   withFetchTodos,
+// )(TodosList);
