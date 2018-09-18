@@ -2,9 +2,9 @@ import { ofType } from "redux-observable";
 
 import { compose } from "ramda";
 
-import { fetchData } from "../commons/operators";
+import { fetchData } from "commons/operators";
 
-import config from "../config";
+import config from "config";
 
 import {
   fetchTodosStart,

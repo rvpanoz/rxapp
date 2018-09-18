@@ -1,3 +1,19 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"]
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": [
+    [
+      "babel-plugin-module-resolver",
+      {
+        "root": ["/src"],
+        "alias": {
+          "commons": "./src/commons",
+          "actions": "./src/actions",
+          "components": "./src/components",
+          "epics": "./src/epics",
+          "reducers": "./src/reducers",
+          "config": "./src/config",
+        }
+      }
+    ]
+  ]
 }

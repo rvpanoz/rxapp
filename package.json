@@ -43,6 +43,7 @@
     "webpack-serve": "^2.0.2"
   },
   "dependencies": {
+    "babel-plugin-module-resolver": "^3.1.1",
     "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
     "react-redux": "^5.0.7",

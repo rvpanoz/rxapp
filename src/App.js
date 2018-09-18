@@ -1,7 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import Header from "./components/common/header";
 import { TodosList } from "./components";
-import { connect } from "react-redux";
 
 const mapStateToProps = state => {
   return {

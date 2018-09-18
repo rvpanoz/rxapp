@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Loader from "components/common/loader";
+
 import styles from "./styles.css";
-import Loader from "../loader";
 
 function Header({ loading }) {
   return (

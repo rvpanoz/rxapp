@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "../common/loader";
+import Loader from "components/common/loader";
 
 const withFetchTodos = Component =>
   class ListContainer extends React.Component {

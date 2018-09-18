@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import { compose } from "redux";
 import { connect } from "react-redux";
 
+import { fetchTodosStart } from "actions";
+
 import TodosListItem from "./TodoListItem";
 
 import withFetchTodos from "./withFetchTodos";
-
-import { fetchTodosStart } from "../../actions";
 
 export const TodosList = ({ todos }) => (
   <div className="tiles">

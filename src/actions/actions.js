@@ -1,4 +1,4 @@
-import { Action } from '../commons/actions';
+import { Action } from 'commons/actions';
 
 const ActionCreator = Action('//TODO_APP');
 

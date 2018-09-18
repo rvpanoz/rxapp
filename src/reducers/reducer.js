@@ -4,7 +4,7 @@ import {
   fetchTodosError,
   fetchTodosSuccess,
   todosFiltered,
-} from '../actions';
+} from 'actions';
 
 import initialState from "./initialState";
 import { identity, assoc, propOr, prop, merge } from "ramda";
