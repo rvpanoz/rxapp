@@ -1,21 +1,31 @@
-import { Observable, throwError, of } from "rxjs";
-import { ajax } from "rxjs/ajax";
+import { ofType } from "redux-observable";
 
-import { map, switchMap, catchError } from "rxjs/operators";
+import { compose } from "ramda";
+
+import { fetchData } from "../commons/operators";
 
 import config from "../config";
 
 import {
   fetchTodosStart,
-  fetchTodosError,
   fetchTodosSuccess,
+  fetchTodosError,
 } from "../actions";
 
-const fetchTodosEpic = (action$, state$) =>
-  action$.ofType(fetchTodosStart.type).pipe(
-    switchMap(() => ajax.getJSON(config.todosUrl)),
-    map(({ data: todos}) => fetchTodosSuccess({ todos })),
-    catchError(error => fetchTodosError({ error })),
+const fetchTodosEpic = action$ =>
+  action$.pipe(
+    ofType(fetchTodosStart.type),
+    fetchData({
+      url: config.todosUrl,
+      successActionCreator: compose(
+        fetchTodosSuccess,
+        ({ data: todos }) => ({ todos }),
+      ),
+      errorActionCreator: compose(
+        fetchTodosError,
+        error => ({ error }),
+      ),
+    })
   );
 
 export default fetchTodosEpic;
