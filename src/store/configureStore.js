@@ -1,12 +1,12 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import { createEpicMiddleware } from "redux-observable";
 
-import { rootReducer, initialState } from "reducers";
-import { rootEpic } from "epics";
+import rootReducer from "models/todos/reducers";
+import rootEpic from "models/todos/epics";
 
 const epicMiddleware = createEpicMiddleware();
 
-export default function configureStore(state = initialState) {
+export default function configureStore(state = rootReducer.initialState) {
   const store = createStore(
     rootReducer,
     state,

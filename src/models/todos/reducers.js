@@ -6,9 +6,14 @@ import {
   fetchTodosError,
   fetchTodosSuccess,
   todosFiltered,
-} from 'actions';
+} from './actions';
 
-import initialState from "./initialState";
+const initialState = {
+  loading: false,
+  error: null,
+  todos: [],
+  filters: []
+};
 
 const handlers = {
   [addTodo.type]: (state, { payload: { todo }}) =>
@@ -23,8 +28,13 @@ const handlers = {
     ({ ...state, todos }),
 };
 
-const createReducer = (state, handlers) =>
-  (state = initialState, action) =>
+const createReducer = (state, handlers) => {
+  const reducer = (state = initialState, action) =>
     propOr(identity, action.type, handlers)(state, action);
+  reducer.initialState = initialState;
+
+  Object.freeze(reducer);
+  return reducer;
+};
 
 export default createReducer(initialState, handlers);

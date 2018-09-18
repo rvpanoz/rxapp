@@ -6,12 +6,13 @@
       {
         "root": ["/src"],
         "alias": {
+          "models": "./src/models",
           "commons": "./src/commons",
           "actions": "./src/actions",
           "components": "./src/components",
           "epics": "./src/epics",
           "reducers": "./src/reducers",
-          "config": "./src/config",
+          "config": "./src/config"
         }
       }
     ]
