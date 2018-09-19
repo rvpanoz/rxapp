@@ -2,7 +2,7 @@ import { ofType } from "redux-observable";
 
 import { compose } from "ramda";
 
-import { fetchData } from "commons/operators";
+import { fetchData } from "commons/rx-operators";
 
 import config from "config";
 

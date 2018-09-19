@@ -1,3 +1,3 @@
-import TodosList from "./todos/TodosList";
+import App from "./App@";
 
-export { TodosList };
+export default App;

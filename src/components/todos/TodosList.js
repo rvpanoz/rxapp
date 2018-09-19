@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import { compose } from "redux";
 import { connect } from "react-redux";
 
-import propsOf from "commons/propsOf";
-
 import {
   loading,
   todos,
@@ -25,18 +23,4 @@ export const TodosList = ({ todos }) => (
   </div>
 );
 
-export default compose(
-  connect(
-    propsOf({ todos, loading }),
-    propsOf({ fetchTodos }),
-  ),
-  withFetchTodos,
-)(TodosList);
-
-// export default compose(
-//   connect(
-//     state => ({ ...todos(state), ...loading(state) }),
-//     dispatch => ({ ...fetchTodos(dispatch) }),
-//   ),
-//   withFetchTodos,
-// )(TodosList);
+export default TodosList;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Loader from "components/common/loader";
+import Loader from "components/layout/loader";
 
 import styles from "./styles.css";
 
@@ -13,7 +13,7 @@ function Header({ loading }) {
         </a>
       </section>
       <section className="navbar-center">
-        {loading === true && <Loader />}
+        {loading && <Loader />}
       </section>
       <section className="navbar-section">
         <a href="#" className="btn btn-link">
