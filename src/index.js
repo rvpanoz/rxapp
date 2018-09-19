@@ -1,13 +1,12 @@
-// require("babel-core/register");
 import "babel-polyfill";
 import React from "react";
 import ReactDOM from "react-dom";
 
 import { Provider } from "react-redux";
 
-import App from "./App";
+import App from "components";
 
-import configureStore from "./store/configureStore";
+import configureStore from "store/configureStore";
 
 const store = configureStore();
 

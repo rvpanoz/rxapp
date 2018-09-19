@@ -1,4 +1,4 @@
-const propsOf = propSelectos => stateOrDispatch =>
+const mapProps = propSelectos => stateOrDispatch =>
     Object.entries(propSelectos).reduce(
       (props, [prop, selector]) => ({
         ...props,
@@ -7,4 +7,4 @@ const propsOf = propSelectos => stateOrDispatch =>
       {},
     );
 
-export default propsOf;
+export default mapProps;

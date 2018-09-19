@@ -18,7 +18,7 @@ const initialState = {
 const handlers = {
   [addTodo.type]: (state, { payload: { todo }}) =>
     ({ ...state, todo }),
-  [fetchTodosStart.type]: (state) =>
+  [fetchTodosStart.type]: state =>
     ({ ...state, loading: true }),
   [fetchTodosSuccess.type]: (state, { payload: { todos }}) =>
     ({ ...state, loading: false, todos }),
@@ -28,13 +28,7 @@ const handlers = {
     ({ ...state, todos }),
 };
 
-const createReducer = (state, handlers) => {
-  const reducer = (state = initialState, action) =>
-    propOr(identity, action.type, handlers)(state, action);
-  reducer.initialState = initialState;
+const reducer = (state = initialState, action) =>
+  propOr(identity, action.type, handlers)(state, action);
 
-  Object.freeze(reducer);
-  return reducer;
-};
-
-export default createReducer(initialState, handlers);
+export default reducer;
