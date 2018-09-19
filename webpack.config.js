@@ -10,6 +10,7 @@ const IS_DEV = process.env.NODE_ENV === "dev";
  */
 module.exports = {
   mode: "development",
+  devtool: "source-map",
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
