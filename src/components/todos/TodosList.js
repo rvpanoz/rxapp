@@ -4,11 +4,7 @@ import PropTypes from "prop-types";
 import { compose } from "redux";
 import { connect } from "react-redux";
 
-import {
-  loading,
-  todos,
-  fetchTodos,
-} from "models/todos/selectors";
+import { loading, todos, fetchTodos } from "models/todos/selectors";
 
 import TodosListItem from "./TodoListItem";
 

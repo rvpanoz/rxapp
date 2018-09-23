@@ -1,3 +1,4 @@
-import fetchData from './fetchData';
+import fetchData from "./fetchData";
+import callServer from "./callServer";
 
-export { fetchData };
+export { fetchData, callServer };
