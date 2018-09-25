@@ -8,26 +8,37 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 
 // core components
-import paperBodyStyle from "./paperBodyStyle";
+import paperFooterStyle from "./paperFooterStyle";
 
-function paperBody({ ...props }) {
-  const { classes, className, children, plain, profile, ...rest } = props;
-  const paperBodyClasses = classNames({
-    [classes.paperBody]: true,
+function paperFooter({ ...props }) {
+  const {
+    classes,
+    className,
+    children,
+    plain,
+    profile,
+    stats,
+    chart,
+    ...rest
+  } = props;
+  const paperFooterClasses = classNames({
+    [classes.paperFooter]: true,
     [className]: className !== undefined
   });
   return (
-    <div className={paperBodyClasses} {...rest}>
+    <div className={paperFooterClasses} {...rest}>
       {children}
     </div>
   );
 }
 
-paperBody.propTypes = {
+paperFooter.propTypes = {
   classes: PropTypes.object.isRequired,
   className: PropTypes.string,
   plain: PropTypes.bool,
-  profile: PropTypes.bool
+  profile: PropTypes.bool,
+  stats: PropTypes.bool,
+  chart: PropTypes.bool
 };
 
-export default withStyles(paperBodyStyle)(paperBody);
+export default withStyles(paperFooterStyle)(paperFooter);

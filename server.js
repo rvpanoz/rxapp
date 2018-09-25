@@ -32,7 +32,7 @@ app.get("/todos", (req, res) => {
       success: true,
       data: TODOS
     });
-  }, 2500);
+  }, 1500);
 });
 
 app.post("/update/{id}", (req, res) => {

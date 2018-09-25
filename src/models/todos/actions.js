@@ -1,17 +1,21 @@
-import { Action } from 'commons/actions';
+import { Action } from "commons/actions";
 
-const ActionCreator = Action('//TODO_APP');
+const ActionCreator = Action("//TODO_APP");
 
-const addTodo = ActionCreator('ADD_TODO');
-const fetchTodosStart = ActionCreator('FETCH_TODOS_START');
-const fetchTodosError = ActionCreator('FETCH_TODOS_ERROR');
-const fetchTodosSuccess = ActionCreator('FETCH_TODOS_SUCCESS');
-const todosFiltered = ActionCreator('TODOS_FILTERED');
+const addTodoStart = ActionCreator("ADD_TODO_START");
+const addTodoSuccess = ActionCreator("ADD_TODO_SUCCESS");
+const addTodoError = ActionCreator("ADD_TODO_ERROR");
+const fetchTodosStart = ActionCreator("FETCH_TODOS_START");
+const fetchTodosError = ActionCreator("FETCH_TODOS_ERROR");
+const fetchTodosSuccess = ActionCreator("FETCH_TODOS_SUCCESS");
+const todosFiltered = ActionCreator("TODOS_FILTERED");
 
 export {
-  addTodo,
+  addTodoStart,
+  addTodoSuccess,
+  addTodoError,
   fetchTodosStart,
   fetchTodosError,
   fetchTodosSuccess,
-  todosFiltered,
-}
+  todosFiltered
+};

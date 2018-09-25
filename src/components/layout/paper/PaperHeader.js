@@ -18,9 +18,6 @@ function paperHeader({ ...props }) {
   const paperHeaderClasses = classNames({
     [classes.paperHeader]: true,
     [classes[color + "paperHeader"]]: color,
-    [classes.paperHeaderPlain]: plain,
-    [classes.paperHeaderStats]: stats,
-    [classes.paperHeaderIcon]: icon,
     [className]: className !== undefined
   });
   return (

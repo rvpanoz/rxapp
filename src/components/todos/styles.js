@@ -9,3 +9,24 @@ export const listItemStyles = theme => ({
     textDecoration: "line-through"
   }
 });
+
+export const todoStyles = theme => ({
+  ...commonStyles,
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  },
+  completedField: {
+    position: "relative",
+    float: "right",
+    top: 30,
+    right: 0
+  },
+  dense: {
+    marginTop: 19
+  },
+  menu: {
+    width: 200
+  }
+});
