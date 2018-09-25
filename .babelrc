@@ -16,6 +16,7 @@
           "store": "./src/store"
         }
       }
-    ]
+    ],
+    "@babel/plugin-proposal-class-properties"
   ]
 }

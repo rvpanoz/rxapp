@@ -1,27 +1,73 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import classNames from "classNames";
 import Loader from "components/layout/loader";
+import { withStyles } from "@material-ui/core";
+import styles from "./styles";
+import Drawer from "@material-ui/core/Drawer";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 
-import styles from "./styles.css";
-
-function Header({ loading }) {
+function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
   return (
-    <header className="navbar">
-      <section className="navbar-section">
-        <a href="#" className="navbar-brand mr-2">
-          RXTodo
-        </a>
-      </section>
-      <section className="navbar-center">
-        {loading && <Loader />}
-      </section>
-      <section className="navbar-section">
-        <a href="#" className="btn btn-link">
-          GitHub
-        </a>
-      </section>
+    <header>
+      <AppBar
+        position="absolute"
+        className={classNames(classes.appBar, open && classes.appBarShift)}
+      >
+        <Toolbar disableGutters={!open} className={classes.toolbar}>
+          <IconButton
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={e => handleDrawerOpen(e)}
+            className={classNames(
+              classes.menuButton,
+              open && classes.menuButtonHidden
+            )}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="title"
+            color="inherit"
+            noWrap
+            className={classes.title}
+          >
+            Dashboard
+          </Typography>
+          <IconButton color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: classNames(
+            classes.drawerPaper,
+            !open && classes.drawerPaperClose
+          )
+        }}
+        open={open}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={e => handleDrawerClose(e)}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+      </Drawer>
     </header>
   );
 }
 
-export default Header;
+export default withStyles(styles)(Header);
