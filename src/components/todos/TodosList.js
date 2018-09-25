@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { loading, todos, fetchTodos } from "models/todos/selectors";
 import TodosListItem from "./TodoListItem";
-import withFetchTodos from "./withFetchTodos";
 import List from "@material-ui/core/List";
 
 class TodosList extends Component {
@@ -49,5 +45,9 @@ class TodosList extends Component {
     );
   }
 }
+
+TodosList.propTypes = {
+  todo: PropTypes.array
+};
 
 export default TodosList;
