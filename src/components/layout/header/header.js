@@ -15,6 +15,7 @@ import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import { mainListItems } from "./headerItems";
 
 function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
   return (
@@ -65,6 +66,8 @@ function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
             <ChevronLeftIcon />
           </IconButton>
         </div>
+        <Divider />
+        <List>{mainListItems}</List>
       </Drawer>
     </React.Fragment>
   );

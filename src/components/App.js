@@ -29,7 +29,7 @@ class App extends Component {
           open={drawerOpen}
         />
         <Grid container style={{ paddingTop: "40px" }}>
-          <Grid item xs={9}>
+          <Grid item xs={9} sm={9} lg={6} xl={6}>
             <Dashboard />
           </Grid>
           <Grid item xs={3} />

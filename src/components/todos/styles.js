@@ -1,7 +1,7 @@
+import commonStyles from "commons/styles";
+
 export const listStyles = theme => ({
-  root: {
-    width: "100%"
-  }
+  ...commonStyles
 });
 
 export const listItemStyles = theme => ({

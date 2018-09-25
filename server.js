@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
 const bodyParser = require("body-parser");
+const TODOS = require("./mock").getTodos();
 
 // to support JSON-encoded bodies
 app.use(bodyParser.json());
@@ -12,27 +13,6 @@ app.use(
     extended: true
   })
 );
-
-const TODOS = [
-  {
-    id: 345,
-    title: "Silly todo 1",
-    completed: 0,
-    created_at: new Date()
-  },
-  {
-    id: 315,
-    title: "Silly todo 2",
-    completed: 1,
-    created_at: new Date()
-  },
-  {
-    id: 366,
-    title: "Silly todo 3",
-    completed: 0,
-    created_at: new Date()
-  }
-];
 
 app.use(function(req, res, next) {
   res.header(
@@ -53,6 +33,10 @@ app.get("/todos", (req, res) => {
       data: TODOS
     });
   }, 2500);
+});
+
+app.post("/update/{id}", (req, res) => {
+  const { body } = req;
 });
 
 app.post("/add", (req, res) => {
