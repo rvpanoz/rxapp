@@ -18,7 +18,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 
 function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
   return (
-    <header>
+    <React.Fragment>
       <AppBar
         position="absolute"
         className={classNames(classes.appBar, open && classes.appBarShift)}
@@ -66,7 +66,7 @@ function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
           </IconButton>
         </div>
       </Drawer>
-    </header>
+    </React.Fragment>
   );
 }
 

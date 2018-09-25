@@ -1,21 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import Checkbox from "@material-ui/core/Checkbox";
+import { withStyles } from "@material-ui/core";
 
-const TodoListItem = ({ todo: { title, created_at } }) => (
-  <div className="tile">
-    <div className="tile-icon">
-      <div className="example-tile-icon">
-        <i className="icon icon-file centered" />
-      </div>
-    </div>
-    <div className="tile-content">
-      <p className="tile-title">{title}</p>
-      <p className="tile-subtitle text-gray">{created_at}</p>
-    </div>
-    <div className="tile-action">
-      <button className="btn btn-success">Done</button>
-    </div>
-  </div>
+const TodoListItem = ({
+  todo: { title, id, created_at },
+  isChecked,
+  handleToggle
+}) => (
+  <ListItem key={title} dense button>
+    <ListItemText primary={title} />
+    <ListItemSecondaryAction>
+      <Checkbox onChange={e => handleToggle(id)} checked={isChecked} />
+    </ListItemSecondaryAction>
+  </ListItem>
 );
 
-export default TodoListItem;
+TodoListItem.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles({})(TodoListItem);

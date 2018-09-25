@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "components/layout/header";
 import Dashboard from "components/dashboard";
+import Grid from "@material-ui/core/Grid";
 
 class App extends Component {
   state = {
@@ -20,18 +21,19 @@ class App extends Component {
     const { drawerOpen } = this.state;
 
     return (
-      <div>
-        <div className="container grid-lg">
-          <Header
-            handleDrawerClose={this.handleDrawerClose}
-            handleDrawerOpen={this.handleDrawerOpen}
-            open={drawerOpen}
-          />
-          <div className="columns" style={{ paddingTop: "15px" }}>
-            <div className="column col-xs-9">{<Dashboard />}</div>
-            <div className="column col-xs-3" />
-          </div>
-        </div>
+      <div style={{ display: "flex" }}>
+        <CssBaseline />
+        <Header
+          handleDrawerClose={this.handleDrawerClose}
+          handleDrawerOpen={this.handleDrawerOpen}
+          open={drawerOpen}
+        />
+        <Grid container>
+          <Grid item xs={9}>
+            <Dashboard />
+          </Grid>
+          <Grid item xs={3} />
+        </Grid>
       </div>
     );
   }

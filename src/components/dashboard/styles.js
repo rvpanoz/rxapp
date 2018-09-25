@@ -4,12 +4,6 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     height: "100vh",
     overflow: "auto"
-  },
-  chartContainer: {
-    marginLeft: -22
-  },
-  tableContainer: {
-    height: 320
   }
 });
 
