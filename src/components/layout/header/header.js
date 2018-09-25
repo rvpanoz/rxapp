@@ -41,7 +41,7 @@ function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            RXTodos
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
