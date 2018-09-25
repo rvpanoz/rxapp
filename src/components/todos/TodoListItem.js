@@ -12,7 +12,7 @@ const TodoListItem = ({
   handleToggle
 }) => (
   <ListItem key={title} dense button>
-    <ListItemText primary={title} />
+    <ListItemText primary={title} secondary={created_at} />
     <ListItemSecondaryAction>
       <Checkbox onChange={e => handleToggle(id)} checked={isChecked} />
     </ListItemSecondaryAction>

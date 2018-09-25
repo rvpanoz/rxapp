@@ -12,8 +12,7 @@ class TodosList extends Component {
     checked: []
   };
 
-  handleToggle = todoId => () => {
-    debugger;
+  handleToggle = todoId => {
     const { checked } = this.state;
     const currentIndex = checked.indexOf(todoId);
     const newChecked = [...checked];
@@ -30,6 +29,7 @@ class TodosList extends Component {
   };
 
   render() {
+    const { checked } = this.state;
     const { todos } = this.props;
 
     return (
@@ -38,10 +38,10 @@ class TodosList extends Component {
           {todos &&
             todos.map((todo, idx) => (
               <TodosListItem
-                handleToggle={id => this.handleToggle(id)}
+                handleToggle={this.handleToggle}
                 key={`todo-${idx}`}
                 todo={todo}
-                isChecked={this.state.checked.indexOf(idx) > -1}
+                isChecked={checked.indexOf(todo.id) > -1}
               />
             ))}
         </List>

@@ -28,7 +28,7 @@ class App extends Component {
           handleDrawerOpen={this.handleDrawerOpen}
           open={drawerOpen}
         />
-        <Grid container>
+        <Grid container style={{ paddingTop: "40px" }}>
           <Grid item xs={9}>
             <Dashboard />
           </Grid>
