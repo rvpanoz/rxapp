@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classNames from "classNames";
+import classnames from "classnames";
 import Loader from "components/layout/loader";
 import { withStyles } from "@material-ui/core";
 import styles from "./styles";
@@ -21,14 +21,14 @@ function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
     <React.Fragment>
       <AppBar
         position="absolute"
-        className={classNames(classes.appBar, open && classes.appBarShift)}
+        className={classnames(classes.appBar, open && classes.appBarShift)}
       >
         <Toolbar disableGutters={!open} className={classes.toolbar}>
           <IconButton
             color="inherit"
             aria-label="Open drawer"
             onClick={e => handleDrawerOpen(e)}
-            className={classNames(
+            className={classnames(
               classes.menuButton,
               open && classes.menuButtonHidden
             )}
@@ -53,7 +53,7 @@ function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
       <Drawer
         variant="permanent"
         classes={{
-          paper: classNames(
+          paper: classnames(
             classes.drawerPaper,
             !open && classes.drawerPaperClose
           )
