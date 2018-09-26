@@ -12,6 +12,15 @@ export const listItemStyles = theme => ({
 
 export const todoStyles = theme => ({
   ...commonStyles,
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+    overflow: "auto"
+  },
+  center: {
+    maxWidth: "50%",
+    position: "relative"
+  },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,

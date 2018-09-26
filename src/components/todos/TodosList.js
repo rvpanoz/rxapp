@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import TodosListItem from "./TodoListItem";
+
+import Loader from "@material-ui/core/CircularProgress";
 import List from "@material-ui/core/List";
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+
 import PaperHeader from "../layout/paper/PaperHeader";
 import PaperBody from "../layout/paper/PaperBody";
-
+import TodosListItem from "./TodoListItem";
 import { listStyles } from "./styles";
 import { withStyles } from "@material-ui/core";
 
@@ -34,7 +36,7 @@ class TodosList extends Component {
 
   render() {
     const { checked } = this.state;
-    const { classes, todos } = this.props;
+    const { classes, todos, loading } = this.props;
 
     return (
       <Paper elevation={2} square className={classes.container}>
@@ -53,7 +55,8 @@ class TodosList extends Component {
         </PaperHeader>
         <PaperBody>
           <div className={classes.list}>
-            <List>
+            {loading && <Loader />}
+            <List style={{ opacity: loading ? 0 : 1 }}>
               {todos &&
                 todos.map((todo, idx) => (
                   <TodosListItem

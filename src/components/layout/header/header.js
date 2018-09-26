@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
-import Loader from "components/layout/loader";
+import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
 import styles from "./styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -15,7 +15,30 @@ import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems } from "./headerItems";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListIcon from "@material-ui/icons/List";
+import AddIcon from "@material-ui/icons/Add";
+
+function Menu(props) {
+  return (
+    <React.Fragment>
+      <ListItem>
+        <ListItemIcon>
+          <ListIcon />
+        </ListItemIcon>
+        <ListItemText primary={<Link to="/">Todos</Link>} />
+      </ListItem>
+      <ListItem>
+        <ListItemIcon>
+          <AddIcon />
+        </ListItemIcon>
+        <ListItemText primary={<Link to="/create">Add todo</Link>} />
+      </ListItem>
+    </React.Fragment>
+  );
+}
 
 function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
   return (
@@ -67,7 +90,9 @@ function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>
+          <Menu />
+        </List>
       </Drawer>
     </React.Fragment>
   );

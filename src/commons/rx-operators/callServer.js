@@ -1,9 +1,9 @@
 import { ajax } from "rxjs/ajax";
-import { map, switchMap, catchError, throwError } from "rxjs/operators";
+import { map, switchMap, catchError, pipe } from "rxjs/operators";
 
 const noop = () => {};
 
-const callServer = opts => $action => {
+const callServer = opts => action$ => {
   let crossDomain = opts && !!opts.crossDomain;
   let options = {
     url: opts.url,
@@ -19,7 +19,7 @@ const callServer = opts => $action => {
       })
     : Object.assign({}, options);
 
-  return $action.pipe(
+  return action$.pipe(
     switchMap(() => ajax(ajaxOpts)),
     map(opts.successActionCreator || noop),
     catchError(opts.errorActionCreator || noop)
