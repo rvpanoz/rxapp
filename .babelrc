@@ -13,7 +13,8 @@
           "epics": "./src/epics",
           "reducers": "./src/reducers",
           "config": "./src/config",
-          "store": "./src/store"
+          "store": "./src/store",
+          "utils": "./src/commons/utils"
         }
       }
     ],

@@ -37,7 +37,7 @@ class TodosList extends Component {
   render() {
     const { checked } = this.state;
     const { classes, todos, loading } = this.props;
-
+    console.log(this.props);
     return (
       <Paper elevation={2} square className={classes.container}>
         <PaperHeader>

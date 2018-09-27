@@ -8,7 +8,6 @@ const addTodoError = ActionCreator("ADD_TODO_ERROR");
 const fetchTodosStart = ActionCreator("FETCH_TODOS_START");
 const fetchTodosError = ActionCreator("FETCH_TODOS_ERROR");
 const fetchTodosSuccess = ActionCreator("FETCH_TODOS_SUCCESS");
-const todosFiltered = ActionCreator("TODOS_FILTERED");
 
 export {
   addTodoStart,
@@ -16,6 +15,5 @@ export {
   addTodoError,
   fetchTodosStart,
   fetchTodosError,
-  fetchTodosSuccess,
-  todosFiltered
+  fetchTodosSuccess
 };

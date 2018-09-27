@@ -6,8 +6,7 @@ import {
   addTodoError,
   fetchTodosStart,
   fetchTodosError,
-  fetchTodosSuccess,
-  todosFiltered
+  fetchTodosSuccess
 } from "./actions";
 
 const initialState = {
@@ -25,15 +24,14 @@ const handlers = {
       loading: true,
       todos: state.todos
     }),
-  [fetchTodosSuccess.type]: (state, { payload: { todos } }) =>
-    merge(state, {
+  [fetchTodosSuccess.type]: (state, { payload: { todos } }) => {
+    return merge(state, {
       loading: false,
       todos
-    }),
+    });
+  },
   [fetchTodosError.type]: (state, { payload: { error } }) =>
-    assoc("error", error, state),
-  [todosFiltered.type]: (state, { payload: { todos } }) =>
-    assoc("todos", todos, state)
+    assoc("error", error, state)
 };
 
 const reducer = (state = initialState, action) =>
