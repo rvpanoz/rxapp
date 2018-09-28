@@ -3,8 +3,18 @@ const app = express();
 const port = process.env.PORT || 3001;
 const bodyParser = require("body-parser");
 
+function _generateId() {
+  const _id = Math.floor(Math.random() * 10);
+
+  if (TODOS.map(todo => todo.id).some(id => id === _id)) {
+    _generateId();
+  } else {
+    return _id;
+  }
+}
+
 //mock data
-const TODOS = [
+var TODOS = [
   {
     id: 345,
     title: "Silly todo 1",
@@ -84,12 +94,35 @@ app.use(function(req, res, next) {
 });
 
 app.get("/todos", function(req, res) {
+  console.log(TODOS);
   setTimeout(() => {
     res.send({
       success: true,
-      data: TODOS
+      data: [
+        {
+          id: 1,
+          completed: 1,
+          created_at: new Date(),
+          title: "ttt1"
+        }
+      ]
     });
   }, 1500);
+});
+
+app.post("/todo", function(req, res) {
+  const { body } = req;
+  const newTodo = Object.assign({}, body, {
+    id: TODOS.sort((a, b) => a.id - b.id)[TODOS.length - 1].id + 1
+  });
+
+  console.log(newTodo);
+  TODOS = [...TODOS, newTodo];
+
+  res.send({
+    success: true,
+    data: TODOS
+  });
 });
 
 app.post("/update/{id}", function(req, res) {

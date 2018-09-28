@@ -58,14 +58,18 @@ class TodosList extends Component {
             {loading && <Loader />}
             <List style={{ opacity: loading ? 0 : 1 }}>
               {todos &&
-                todos.map((todo, idx) => (
-                  <TodosListItem
-                    handleToggle={this.handleToggle}
-                    key={`todo-${idx}`}
-                    todo={todo}
-                    isChecked={checked.indexOf(todo.id) > -1}
-                  />
-                ))}
+                todos.map((todo, idx) => {
+                  return (
+                    todo && (
+                      <TodosListItem
+                        handleToggle={this.handleToggle}
+                        key={`todo-${idx}`}
+                        todo={todo}
+                        isChecked={checked.indexOf(todo.id) > -1}
+                      />
+                    )
+                  );
+                })}
             </List>
           </div>
         </PaperBody>

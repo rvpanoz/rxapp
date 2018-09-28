@@ -15,17 +15,19 @@ import {
   fetchTodosSuccess
 } from "./actions";
 
-const TODOS_URL = config.todosUrl;
-const TODO_URL = config.todoUrl;
+const { api } = config;
+
+const TODOS_URL = api.todos;
+const TODO_URL = api.todo;
 
 const addTodoEpic = action$ =>
   action$.pipe(
     ofType(addTodoStart.type),
-    mergeMap(action =>
+    mergeMap(({ payload }) =>
       request({
         url: TODO_URL,
         method: "POST",
-        body: action.payload
+        body: payload
       })
     ),
     map(() => ({

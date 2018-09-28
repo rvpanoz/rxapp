@@ -15,7 +15,7 @@ const request = params => {
     },
     params
   );
-  console.log(options);
+
   return new Promise((resolve, reject) =>
     ajax(options).subscribe(data => resolve(data), error => reject(error))
   );

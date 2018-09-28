@@ -23,14 +23,13 @@ class Todo extends React.Component {
   };
 
   addTodo = e => {
-    console.log(this.props);
     const _todo = {
       title: "todo_1",
       completed: 0,
       created_at: new Date()
     };
 
-    // this.props.addTodo(_todo);
+    this.props.add(_todo);
   };
 
   handleChange = name => event => {
