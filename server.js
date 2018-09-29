@@ -94,7 +94,6 @@ app.use(function(req, res, next) {
 });
 
 app.get("/todos", function(req, res) {
-  console.log(TODOS);
   setTimeout(() => {
     res.send({
       success: true,
@@ -116,7 +115,6 @@ app.post("/todo", function(req, res) {
     id: TODOS.sort((a, b) => a.id - b.id)[TODOS.length - 1].id + 1
   });
 
-  console.log(newTodo);
   TODOS = [...TODOS, newTodo];
 
   res.send({

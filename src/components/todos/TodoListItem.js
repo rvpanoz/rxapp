@@ -24,7 +24,11 @@ const TodoListItem = ({
   >
     <ListItemText primary={title} secondary={created_at} />
     <ListItemSecondaryAction>
-      <Checkbox onChange={e => handleToggle(id)} checked={isChecked} />
+      <Checkbox
+        onChange={e => handleToggle(id)}
+        checked={isChecked}
+        color="primary"
+      />
     </ListItemSecondaryAction>
   </ListItem>
 );

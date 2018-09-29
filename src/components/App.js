@@ -34,25 +34,23 @@ class App extends Component {
     const { drawerOpen } = this.state;
 
     return (
-      <Router>
-        <div style={{ display: "flex" }}>
-          <CssBaseline />
-          <Header
-            handleDrawerClose={this.handleDrawerClose}
-            handleDrawerOpen={this.handleDrawerOpen}
-            open={drawerOpen}
-          />
-          <Grid container style={{ paddingTop: "40px" }}>
-            <Grid item xs={12} sm={12} lg={12} xl={12}>
-              <Switch>
-                <Route exact path="/" component={Dashboard} />
-                <Route exact path="/create" component={Todo} />
-                <Route component={NoMatch} />
-              </Switch>
-            </Grid>
-          </Grid>
-        </div>
-      </Router>
+      <div id="app" style={{ display: "flex" }}>
+        <CssBaseline />
+        <Router>
+          <React.Fragment>
+            <Header
+              handleDrawerClose={this.handleDrawerClose}
+              handleDrawerOpen={this.handleDrawerOpen}
+              open={drawerOpen}
+            />
+            <Switch>
+              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/create" component={Todo} />
+              <Route component={NoMatch} />
+            </Switch>
+          </React.Fragment>
+        </Router>
+      </div>
     );
   }
 }

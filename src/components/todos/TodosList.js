@@ -6,10 +6,10 @@ import List from "@material-ui/core/List";
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-
 import PaperHeader from "../layout/paper/PaperHeader";
 import PaperBody from "../layout/paper/PaperBody";
 import TodosListItem from "./TodoListItem";
+import Filters from "./Filters";
 import { listStyles } from "./styles";
 import { withStyles } from "@material-ui/core";
 
@@ -37,7 +37,7 @@ class TodosList extends Component {
   render() {
     const { checked } = this.state;
     const { classes, todos, loading } = this.props;
-    console.log(this.props);
+
     return (
       <Paper elevation={2} square className={classes.container}>
         <PaperHeader>
@@ -54,6 +54,9 @@ class TodosList extends Component {
           <Divider />
         </PaperHeader>
         <PaperBody>
+          <div className={classes.filters}>
+            <Filters />
+          </div>
           <div className={classes.list}>
             {loading && <Loader />}
             <List style={{ opacity: loading ? 0 : 1 }}>

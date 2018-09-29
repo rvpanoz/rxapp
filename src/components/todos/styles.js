@@ -39,3 +39,7 @@ export const todoStyles = theme => ({
     width: 200
   }
 });
+
+export const filtersStyles = theme => ({
+  field: {}
+});

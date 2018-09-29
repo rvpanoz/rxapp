@@ -54,7 +54,7 @@ const fetchTodosEpic = action$ =>
       return {
         type: fetchTodosSuccess.type,
         payload: {
-          todos: response.data
+          todos: response
         }
       };
     }),
