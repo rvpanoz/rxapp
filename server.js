@@ -5,6 +5,8 @@ const app = express();
 const port = process.env.PORT || 3001;
 const bodyParser = require("body-parser");
 
+//MIDDLEWARES
+
 // to support JSON-encoded bodies
 app.use(bodyParser.json());
 
@@ -15,6 +17,7 @@ app.use(
   })
 );
 
+//HEADERS
 app.use(function(req, res, next) {
   res.header(
     "Access-Control-Allow-Headers",
@@ -27,6 +30,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+//ROUTES
 app.get("/api/todos", function(req, res) {
   const TODOS = fs.readFileSync("./db.json", {
     encoding: "utf8"
@@ -88,6 +92,8 @@ app.post("/api/todo/create", function(req, res) {
 });
 
 app.post("/update/{id}", function(req, res) {
+  //TODO
+
   const { body } = req;
 
   res.send({
@@ -96,14 +102,7 @@ app.post("/update/{id}", function(req, res) {
   });
 });
 
-app.post("/add", function(req, res) {
-  const { body } = req;
-
-  res.send({
-    success: true,
-    data: body
-  });
-});
+/////
 
 app.listen(port, function() {
   console.log(`Server is running at port: ${port}`);

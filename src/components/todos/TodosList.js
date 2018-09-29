@@ -13,9 +13,25 @@ import Filters from "./Filters";
 import { listStyles } from "./styles";
 import { withStyles } from "@material-ui/core";
 
+const FILTERSMAPPING = {
+  completed: "1",
+  active: "0"
+};
+
 class TodosList extends Component {
   state = {
+    activeFilter: "",
     checked: []
+  };
+
+  constructor(props) {
+    super(props);
+  }
+
+  handleFilter = name => event => {
+    this.setState({
+      activeFilter: name
+    });
   };
 
   handleToggle = todoId => {
@@ -34,9 +50,24 @@ class TodosList extends Component {
     });
   };
 
+  filterTodos = filterName => {
+    const { todos } = this.props;
+    console.log(filterName);
+    return todos.filter(todo => todo.completed === FILTERSMAPPING[filterName]);
+  };
+
   render() {
-    const { checked } = this.state;
+    const { checked, activeFilter } = this.state;
     const { classes, todos, loading } = this.props;
+
+    //clone todos
+    let _todos = todos.slice(0);
+
+    if (activeFilter && !!activeFilter.length && activeFilter !== "all") {
+      _todos = this.filterTodos(activeFilter);
+    }
+
+    console.log(_todos);
 
     return (
       <Paper elevation={2} square className={classes.container}>
@@ -55,13 +86,16 @@ class TodosList extends Component {
         </PaperHeader>
         <PaperBody>
           <div className={classes.filters}>
-            <Filters />
+            <Filters
+              filter={this.state.activeFilter}
+              handleFilter={this.handleFilter}
+            />
           </div>
           <div className={classes.list}>
             {loading && <Loader />}
             <List style={{ opacity: loading ? 0 : 1 }}>
-              {todos &&
-                todos.map((todo, idx) => {
+              {_todos &&
+                _todos.map((todo, idx) => {
                   return (
                     todo && (
                       <TodosListItem

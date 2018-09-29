@@ -9,4 +9,4 @@ run the app:
 start the http server:
 `npm run start-server.js`
 
-navigate to `localhost:8080` to preview the app.
+preview the app: `localhost:8080`
