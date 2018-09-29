@@ -7,6 +7,6 @@ run the app:
 `npm start`
 
 start the http server:
-`node server.js`
+`npm run start-server.js`
 
 navigate to `localhost:8080` to preview the app.
