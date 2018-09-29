@@ -18,14 +18,15 @@ import {
 const { api } = config;
 
 const TODOS_URL = api.todos;
-const TODO_URL = api.todo;
+const TODO_CREATE_URL = api.create;
+const TODO_UPDATE_URL = api.update;
 
 const addTodoEpic = action$ =>
   action$.pipe(
     ofType(addTodoStart.type),
     mergeMap(({ payload }) =>
       request({
-        url: TODO_URL,
+        url: TODO_CREATE_URL,
         method: "POST",
         body: payload
       })
@@ -54,7 +55,7 @@ const fetchTodosEpic = action$ =>
       return {
         type: fetchTodosSuccess.type,
         payload: {
-          todos: response
+          todos: response.data
         }
       };
     }),

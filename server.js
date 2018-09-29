@@ -1,75 +1,9 @@
+const fs = require("fs");
+const path = require("path");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
 const bodyParser = require("body-parser");
-
-function _generateId() {
-  const _id = Math.floor(Math.random() * 10);
-
-  if (TODOS.map(todo => todo.id).some(id => id === _id)) {
-    _generateId();
-  } else {
-    return _id;
-  }
-}
-
-//mock data
-var TODOS = [
-  {
-    id: 345,
-    title: "Silly todo 1",
-    completed: 0,
-    created_at: new Date()
-  },
-  {
-    id: 315,
-    title: "Silly todo 2",
-    completed: 1,
-    created_at: new Date()
-  },
-  {
-    id: 366,
-    title: "Silly todo 3",
-    completed: 0,
-    created_at: new Date()
-  },
-  {
-    id: 112,
-    title: "Silly todo 4",
-    completed: 0,
-    created_at: new Date()
-  },
-  {
-    id: 34,
-    title: "Silly todo 5",
-    completed: 1,
-    created_at: new Date()
-  },
-  {
-    id: 599,
-    title: "Silly todo 6",
-    completed: 0,
-    created_at: new Date()
-  },
-  {
-    id: 346,
-    title: "Silly todo 7",
-    completed: 0,
-    created_at: new Date()
-  },
-  {
-    id: 178,
-    title: "Silly todo 8",
-    completed: 1,
-    created_at: new Date()
-  },
-  {
-    id: 199,
-    title: "Silly todo 9",
-    completed: 0,
-    created_at: new Date()
-  }
-];
 
 // to support JSON-encoded bodies
 app.use(bodyParser.json());
@@ -93,34 +27,64 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get("/todos", function(req, res) {
-  setTimeout(() => {
-    res.send({
-      success: true,
-      data: [
-        {
-          id: 1,
-          completed: 1,
-          created_at: new Date(),
-          title: "ttt1"
-        }
-      ]
-    });
-  }, 1500);
+app.get("/api/todos", function(req, res) {
+  const TODOS = fs.readFileSync("./db.json", {
+    encoding: "utf8"
+  });
+
+  try {
+    const { todos } = JSON.parse(TODOS);
+
+    if (!todos) {
+      return res.send({
+        success: true,
+        data: []
+      });
+    }
+
+    setTimeout(() => {
+      res.send({
+        success: true,
+        data: todos
+      });
+    }, 1500);
+  } catch (error) {
+    throw new Error(error);
+  }
 });
 
-app.post("/todo", function(req, res) {
+app.post("/api/todo/create", function(req, res) {
   const { body } = req;
-  const newTodo = Object.assign({}, body, {
-    id: TODOS.sort((a, b) => a.id - b.id)[TODOS.length - 1].id + 1
+
+  const TODOS = fs.readFileSync("./db.json", {
+    encoding: "utf8"
   });
 
-  TODOS = [...TODOS, newTodo];
+  try {
+    const data = JSON.parse(TODOS);
+    const { todos } = data;
 
-  res.send({
-    success: true,
-    data: TODOS
-  });
+    const newTodo = Object.assign({}, body, {
+      id:
+        todos && todos.length
+          ? todos.sort((a, b) => a.id - b.id)[todos.length - 1].id + 1
+          : 1
+    });
+
+    const newData = Object.assign({}, data, {
+      todos: [...data.todos, newTodo]
+    });
+
+    fs.writeFileSync("./db.json", JSON.stringify(newData), {
+      encoding: "utf8"
+    });
+
+    res.send({
+      success: true
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
 });
 
 app.post("/update/{id}", function(req, res) {
