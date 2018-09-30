@@ -19,6 +19,7 @@ import Loader from "@material-ui/core/CircularProgress";
 
 class Todo extends React.Component {
   state = {
+    needSave: false,
     isDirty: false,
     todo: {
       title: "",
@@ -40,13 +41,31 @@ class Todo extends React.Component {
 
   addTodo = e => {
     const { todo } = this.state;
-    this.props.add(todo);
+
+    this.setState(
+      {
+        needSave: true
+      },
+      () => this.props.add(todo)
+    );
   };
 
   updateTodo = (e, id) => {
     const { todo } = this.state;
-    this.props.update(todo);
+
+    this.setState(
+      {
+        needSave: true
+      },
+      () => this.props.update(todo)
+    );
   };
+
+  componentDidUpdate(prevProps) {
+    if (this.state.needSave && this.state.todo !== this.props.todo) {
+      this.props.history.push(`/`);
+    }
+  }
 
   componentDidMount() {
     const { id } = this.props.match && this.props.match.params;
