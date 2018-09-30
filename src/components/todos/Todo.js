@@ -175,8 +175,9 @@ class Todo extends React.Component {
                   color="secondary"
                   variant="contained"
                   disabled={loading}
+                  onClick={e => this.props.history.push(`/`)}
                 >
-                  Cancel
+                  Back
                 </Button>
               </PaperFooter>
             </Paper>
