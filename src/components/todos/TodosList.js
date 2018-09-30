@@ -63,7 +63,7 @@ class TodosList extends Component {
     const { classes, todos, loading } = this.props;
 
     //clone todos
-    let _todos = todos.slice(0);
+    let _todos = todos && Array.isArray(todos) ? todos.slice(0) : [];
 
     if (activeFilter && !!activeFilter.length && activeFilter !== "all") {
       _todos = this.filterTodos(activeFilter);

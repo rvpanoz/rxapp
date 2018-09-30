@@ -14,22 +14,37 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { todoStyles } from "./styles";
 import Grid from "@material-ui/core/Grid";
+import { merge } from "ramda";
 
 class Todo extends React.Component {
   state = {
-    title: "",
-    completed: 0,
-    created_at: new Date()
+    isDirty: false,
+    todo: {
+      title: "",
+      completed: "0",
+      created_at: new Date(),
+      comment: ""
+    }
   };
 
-  addTodo = e => {
-    const _todo = {
-      title: "todo_1",
-      completed: 0,
-      created_at: new Date()
-    };
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { id } = nextProps.match && nextProps.match.params;
+    const { isDirty } = prevState;
 
-    this.props.add(_todo);
+    return {
+      ...prevState,
+      todo: id && !isDirty ? nextProps.todo : prevState.todo
+    };
+  }
+
+  addTodo = e => {
+    const { todo } = this.state;
+    this.props.add(todo);
+  };
+
+  updateTodo = (e, id) => {
+    const { todo } = this.state;
+    this.props.update(todo);
   };
 
   componentDidMount() {
@@ -41,13 +56,26 @@ class Todo extends React.Component {
   }
 
   handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
+    this.setState(
+      {
+        isDirty: true,
+        todo: merge(this.state.todo, {
+          [name]:
+            name === "completed"
+              ? event.target.checked
+                ? "1"
+                : "0"
+              : event.target.value
+        })
+      },
+      () => console.log(this.state)
+    );
   };
 
   render() {
     const { classes } = this.props;
+    const { todo } = this.state;
+    const { id } = this.props.match && this.props.match.params;
 
     return (
       <main className={classes.content}>
@@ -75,7 +103,7 @@ class Todo extends React.Component {
                         id="todo-title"
                         label="Title"
                         className={classes.textField}
-                        value={this.state.title}
+                        value={todo ? todo.title : ""}
                         helperText="add title"
                         onChange={this.handleChange("title")}
                         margin="normal"
@@ -86,9 +114,8 @@ class Todo extends React.Component {
                         className={classes.completedField}
                         control={
                           <Checkbox
-                            checked={false}
+                            checked={todo && todo.completed === "1"}
                             onChange={this.handleChange("completed")}
-                            value="0"
                             color="primary"
                           />
                         }
@@ -99,6 +126,7 @@ class Todo extends React.Component {
                       <TextField
                         id="todo-comment"
                         label="Comment"
+                        value={todo ? todo.comment : ""}
                         style={{ margin: 8 }}
                         placeholder="add a comment"
                         helperText="your comment"
@@ -120,7 +148,7 @@ class Todo extends React.Component {
                 <Button
                   color="primary"
                   variant="contained"
-                  onClick={e => this.addTodo(e)}
+                  onClick={e => (id ? this.updateTodo(e, id) : this.addTodo(e))}
                 >
                   Save
                 </Button>

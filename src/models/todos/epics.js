@@ -10,6 +10,9 @@ import {
   addTodoStart,
   addTodoSuccess,
   addTodoError,
+  updateTodoStart,
+  updateTodoSuccess,
+  updateTodoError,
   fetchTodoStart,
   fetchTodoSuccess,
   fetchTodoError,
@@ -44,6 +47,25 @@ const addTodoEpic = action$ =>
     }))
   );
 
+const updateTodoEpic = action$ =>
+  action$.pipe(
+    ofType(updateTodoStart.type),
+    mergeMap(({ payload }) =>
+      request({
+        url: TODO_URL,
+        method: "POST",
+        body: payload
+      })
+    ),
+    map(() => ({
+      type: addTodoSuccess.type
+    })),
+    catchError(err => ({
+      type: addTodoError.type,
+      err
+    }))
+  );
+
 const fetchTodoEpic = action$ =>
   action$.pipe(
     ofType(fetchTodoStart.type),
@@ -59,7 +81,7 @@ const fetchTodoEpic = action$ =>
       return {
         type: fetchTodoSuccess.type,
         payload: {
-          todo: response.data
+          todo: response.data && response.data[0]
         }
       };
     }),
@@ -94,4 +116,9 @@ const fetchTodosEpic = action$ =>
     }))
   );
 
-export default combineEpics(addTodoEpic, fetchTodosEpic, fetchTodoEpic);
+export default combineEpics(
+  addTodoEpic,
+  updateTodoEpic,
+  fetchTodosEpic,
+  fetchTodoEpic
+);

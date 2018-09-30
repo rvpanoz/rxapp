@@ -1,5 +1,6 @@
 import {
   addTodoStart,
+  updateTodoStart,
   fetchTodosStart,
   fetchTodosSuccess,
   fetchTodoStart
@@ -7,8 +8,10 @@ import {
 
 const loading = ({ todos: { loading } }) => loading;
 const todos = ({ todos: { todos } }) => todos;
+const todo = ({ todos: { todo } }) => todo;
 
 const onAddTodo = dispatch => todo => dispatch(addTodoStart(todo));
+const onUpdateTodo = dispatch => todo => dispatch(updateTodoStart(todo));
 const onFetchTodo = dispatch => todoId => dispatch(fetchTodoStart(todoId));
 const onFetchTodos = dispatch => () => dispatch(fetchTodosStart());
 const onFetchTodosSuccess = dispatch => todos => {
@@ -22,7 +25,9 @@ const onFetchTodosSuccess = dispatch => todos => {
 export {
   loading,
   todos,
+  todo,
   onAddTodo,
+  onUpdateTodo,
   onFetchTodos,
   onFetchTodosSuccess,
   onFetchTodo

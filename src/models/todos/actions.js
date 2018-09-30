@@ -5,6 +5,9 @@ const ActionCreator = Action("//TODO_APP");
 const addTodoStart = ActionCreator("ADD_TODO_START");
 const addTodoSuccess = ActionCreator("ADD_TODO_SUCCESS");
 const addTodoError = ActionCreator("ADD_TODO_ERROR");
+const updateTodoStart = ActionCreator("UPDATE_TODO_START");
+const updateTodoSuccess = ActionCreator("UPDATE_TODO_SUCCESS");
+const updateTodoError = ActionCreator("UPDATE_TODO_ERROR");
 const fetchTodoStart = ActionCreator("FETCH_TODO_START");
 const fetchTodoError = ActionCreator("FETCH_TODO_ERROR");
 const fetchTodoSuccess = ActionCreator("FETCH_TODO_SUCCESS");
@@ -16,6 +19,9 @@ export {
   addTodoStart,
   addTodoSuccess,
   addTodoError,
+  updateTodoStart,
+  updateTodoSuccess,
+  updateTodoError,
   fetchTodoStart,
   fetchTodoError,
   fetchTodoSuccess,

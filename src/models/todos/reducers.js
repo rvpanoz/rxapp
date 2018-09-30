@@ -4,7 +4,11 @@ import {
   addTodoStart,
   addTodoSuccess,
   addTodoError,
+  updateTodoStart,
+  updateTodoSuccess,
+  updateTodoError,
   fetchTodoStart,
+  fetchTodoSuccess,
   fetchTodoError,
   fetchTodosStart,
   fetchTodosError,
@@ -14,24 +18,34 @@ import {
 const initialState = {
   loading: false,
   error: null,
-  todos: []
+  todos: [],
+  todo: null
 };
 
 const handlers = {
   [addTodoStart.type]: (state, { payload: { todo } }) =>
-    assoc("todos", prepend(todo, state.todos), state),
+    merge(state, {
+      loading: true,
+      todos: assoc("todos", prepend(todo, state.todos), state)
+    }),
+  [updateTodoStart.type]: (state, { payload: { todo } }) =>
+    assoc("loading", true, state),
   [fetchTodoStart.type]: state => assoc("loading", true, state),
+  [fetchTodoSuccess.type]: (state, { payload: { todo } }) =>
+    merge(state, {
+      loading: false,
+      todo
+    }),
   [fetchTodosStart.type]: state =>
     merge(state, {
       loading: true,
       todos: state.todos
     }),
-  [fetchTodosSuccess.type]: (state, { payload: { todos } }) => {
-    return merge(state, {
+  [fetchTodosSuccess.type]: (state, { payload: { todos } }) =>
+    merge(state, {
       loading: false,
       todos
-    });
-  },
+    }),
   [fetchTodosError.type]: (state, { payload: { error } }) =>
     assoc("error", error, state),
   [fetchTodoError.type]: (state, { payload: { error } }) =>
