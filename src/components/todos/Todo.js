@@ -145,19 +145,19 @@ class Todo extends React.Component {
               </PaperBody>
               <PaperFooter>
                 <Button
-                  color="secondary"
-                  variant="contained"
-                  disabled={loading}
-                >
-                  Cancel
-                </Button>
-                <Button
                   disabled={loading}
                   color="primary"
                   variant="contained"
                   onClick={e => (id ? this.updateTodo(e, id) : this.addTodo(e))}
                 >
                   Save
+                </Button>
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  disabled={loading}
+                >
+                  Cancel
                 </Button>
               </PaperFooter>
             </Paper>
