@@ -1,7 +1,10 @@
 import commonStyles from "commons/styles";
 
 export const listStyles = theme => ({
-  ...commonStyles
+  ...commonStyles,
+  list: {
+    minHeight: "600px"
+  }
 });
 
 export const listItemStyles = theme => ({
@@ -14,8 +17,9 @@ export const todoStyles = theme => ({
   ...commonStyles,
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    overflow: "auto"
+    padding: theme.spacing.unit * 2,
+    height: "100%",
+    paddingTop: 60
   },
   center: {
     maxWidth: "50%",

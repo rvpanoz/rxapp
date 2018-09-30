@@ -7,12 +7,15 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import { withStyles } from "@material-ui/core";
 import { listItemStyles } from "./styles";
+import { format } from "date-fns";
+import config from "config";
 
 const TodoListItem = ({
   classes,
   todo: { title, id, created_at },
   isChecked,
-  handleToggle
+  handleToggle,
+  handleNavigation
 }) => (
   <ListItem
     className={classnames({
@@ -21,8 +24,12 @@ const TodoListItem = ({
     key={title}
     dense
     button
+    onClick={e => handleNavigation(id)}
   >
-    <ListItemText primary={title} secondary={created_at} />
+    <ListItemText
+      primary={title}
+      secondary={format(created_at, config.dateFormat)}
+    />
     <ListItemSecondaryAction>
       <Checkbox
         onChange={e => handleToggle(id)}

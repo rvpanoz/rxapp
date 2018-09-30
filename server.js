@@ -57,6 +57,15 @@ app.get("/api/todos", function(req, res) {
   }
 });
 
+app.get("/api/todo/id", function(req, res) {
+  const { todoId } = req.query;
+
+  res.send({
+    success: true,
+    data: todoId
+  });
+});
+
 app.post("/api/todo/create", function(req, res) {
   const { body } = req;
 

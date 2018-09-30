@@ -50,9 +50,11 @@ class TodosList extends Component {
     });
   };
 
+  handleNavigation = todoId => this.props.history.push(`/todo/${todoId}`);
+
   filterTodos = filterName => {
     const { todos } = this.props;
-    console.log(filterName);
+
     return todos.filter(todo => todo.completed === FILTERSMAPPING[filterName]);
   };
 
@@ -66,8 +68,6 @@ class TodosList extends Component {
     if (activeFilter && !!activeFilter.length && activeFilter !== "all") {
       _todos = this.filterTodos(activeFilter);
     }
-
-    console.log(_todos);
 
     return (
       <Paper elevation={2} square className={classes.container}>
@@ -92,13 +92,14 @@ class TodosList extends Component {
             />
           </div>
           <div className={classes.list}>
-            {loading && <Loader />}
+            {loading && <Loader className={classes.loader} />}
             <List style={{ opacity: loading ? 0 : 1 }}>
               {_todos &&
                 _todos.map((todo, idx) => {
                   return (
                     todo && (
                       <TodosListItem
+                        handleNavigation={this.handleNavigation}
                         handleToggle={this.handleToggle}
                         key={`todo-${idx}`}
                         todo={todo}

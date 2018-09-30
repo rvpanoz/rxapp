@@ -1,7 +1,7 @@
 const common = {
   container: {
     zIndex: 1,
-    padding: 0,
+    padding: "20px 0 0 10px",
     margin: 15,
     width: "100%",
     height: "100%",

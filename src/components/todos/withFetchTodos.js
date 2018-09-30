@@ -7,9 +7,9 @@ const withFetchTodos = Component =>
     }
 
     render() {
-      const { todos, loading } = this.props;
+      const { todos, loading, history } = this.props;
 
-      return <Component todos={todos} loading={loading} />;
+      return <Component todos={todos} loading={loading} history={history} />;
     }
   };
 

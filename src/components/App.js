@@ -46,6 +46,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Dashboard} />
               <Route exact path="/create" component={Todo} />
+              <Route path="/todo" component={Todo} />
               <Route component={NoMatch} />
             </Switch>
           </React.Fragment>

@@ -7,11 +7,11 @@ import TodoList from "components/todos";
 
 class Dashboard extends Component {
   render() {
-    const { classes, loading } = this.props;
+    const { classes } = this.props;
 
     return (
       <main className={classes.content}>
-        <Grid container style={{ paddingTop: "40px" }}>
+        <Grid container>
           <Grid item xs={6} sm={6} lg={4} xl={4}>
             <TodoList {...this.props} />
           </Grid>
