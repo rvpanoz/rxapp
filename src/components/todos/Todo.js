@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import PaperHeader from "../layout/paper/PaperHeader";
 import PaperBody from "../layout/paper/PaperBody";
 import PaperFooter from "../layout/paper/PaperFooter";
+import { Notifier } from "../layout/system";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -21,6 +22,7 @@ class Todo extends React.Component {
   state = {
     needSave: false,
     isDirty: false,
+    notifierOpen: false,
     todo: {
       title: "",
       completed: "0",
@@ -62,6 +64,16 @@ class Todo extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
+    if (
+      this.props.loading === false &&
+      this.props.loading !== prevProps.loading
+    ) {
+      this.setState({
+        notifierOpen: true,
+        notifierMessage: "Todo loaded"
+      });
+    }
+
     if (this.state.needSave && this.state.todo !== this.props.todo) {
       this.props.history.push(`/`);
     }
@@ -180,6 +192,10 @@ class Todo extends React.Component {
                   Back
                 </Button>
               </PaperFooter>
+              <Notifier
+                open={this.state.notifierOpen}
+                message={this.state.notifierMessage}
+              />
             </Paper>
           </Grid>
         </Grid>
