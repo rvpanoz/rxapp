@@ -11,6 +11,8 @@ import {
   addTodoSuccess,
   addTodoError,
   fetchTodoStart,
+  fetchTodoSuccess,
+  fetchTodoError,
   fetchTodosStart,
   fetchTodosError,
   fetchTodosSuccess
@@ -45,27 +47,24 @@ const addTodoEpic = action$ =>
 const fetchTodoEpic = action$ =>
   action$.pipe(
     ofType(fetchTodoStart.type),
-    mergeMap(todoId =>
+    mergeMap(({ payload }) =>
       request({
-        url: TODO_URL,
-        method: "GET",
-        query: {
-          todoId
-        }
+        url: `${TODO_URL}/${payload}`,
+        method: "GET"
       })
     ),
     map(ajaxResponse => {
       const { response } = ajaxResponse;
 
       return {
-        type: fetchTodosSuccess.type,
+        type: fetchTodoSuccess.type,
         payload: {
-          todos: response.data
+          todo: response.data
         }
       };
     }),
     catchError(err => ({
-      type: fetchTodosError.type,
+      type: fetchTodoError.type,
       err
     }))
   );
@@ -95,4 +94,4 @@ const fetchTodosEpic = action$ =>
     }))
   );
 
-export default combineEpics(addTodoEpic, fetchTodosEpic);
+export default combineEpics(addTodoEpic, fetchTodosEpic, fetchTodoEpic);

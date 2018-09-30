@@ -32,6 +32,14 @@ class Todo extends React.Component {
     this.props.add(_todo);
   };
 
+  componentDidMount() {
+    const { id } = this.props.match && this.props.match.params;
+
+    if (id) {
+      this.props.load(id);
+    }
+  }
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value

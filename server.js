@@ -57,13 +57,32 @@ app.get("/api/todos", function(req, res) {
   }
 });
 
-app.get("/api/todo/id", function(req, res) {
-  const { todoId } = req.query;
+app.get("/api/todo/:id", function(req, res) {
+  const { id } = req.params;
 
-  res.send({
-    success: true,
-    data: todoId
+  const TODOS = fs.readFileSync("./db.json", {
+    encoding: "utf8"
   });
+
+  try {
+    const { todos } = JSON.parse(TODOS);
+
+    if (!todos || !Array.isArray(todos)) {
+      return res.send({
+        success: true,
+        data: []
+      });
+    }
+
+    setTimeout(() => {
+      res.send({
+        success: true,
+        data: todos.filter(todo => todo.id === parseInt(id))
+      });
+    }, 1500);
+  } catch (error) {
+    throw new Error(error);
+  }
 });
 
 app.post("/api/todo/create", function(req, res) {
