@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
 const bodyParser = require("body-parser");
+const merge = require("ramda").merge;
 
 //MIDDLEWARES
 
@@ -60,11 +61,10 @@ app.get("/api/todos", function(req, res) {
 app.get("/api/todo/:id", function(req, res) {
   const { id } = req.params;
 
-  const TODOS = fs.readFileSync("./db.json", {
-    encoding: "utf8"
-  });
-
   try {
+    const TODOS = fs.readFileSync("./db.json", {
+      encoding: "utf8"
+    });
     const { todos } = JSON.parse(TODOS);
 
     if (!todos || !Array.isArray(todos)) {
@@ -77,7 +77,7 @@ app.get("/api/todo/:id", function(req, res) {
     setTimeout(() => {
       res.send({
         success: true,
-        data: todos.filter(todo => todo.id === parseInt(id))
+        data: todos.filter(todo => todo.id === id)
       });
     }, 1500);
   } catch (error) {
@@ -88,11 +88,10 @@ app.get("/api/todo/:id", function(req, res) {
 app.post("/api/todo/create", function(req, res) {
   const { body } = req;
 
-  const TODOS = fs.readFileSync("./db.json", {
-    encoding: "utf8"
-  });
-
   try {
+    const TODOS = fs.readFileSync("./db.json", {
+      encoding: "utf8"
+    });
     const data = JSON.parse(TODOS);
     const { todos } = data;
 
@@ -119,15 +118,40 @@ app.post("/api/todo/create", function(req, res) {
   }
 });
 
-app.post("/update/{id}", function(req, res) {
-  //TODO
-
+app.post("/api/todo/update", function(req, res) {
   const { body } = req;
+  const { id } = body || {};
 
-  res.send({
-    success: true,
-    data: body
-  });
+  try {
+    const TODOS = fs.readFileSync("./db.json", {
+      encoding: "utf8"
+    });
+    const data = JSON.parse(TODOS);
+    const { todos } = data;
+
+    const todo = todos && todos.find(todo => todo.id === id);
+
+    if (!todo) {
+      return res.send({
+        success: true,
+        data: null
+      });
+    }
+
+    const newData = Object.assign({}, data, {
+      todos: todos.map(todo => (todo.id === id ? merge(todo, body) : todo))
+    });
+
+    fs.writeFileSync("./db.json", JSON.stringify(newData), {
+      encoding: "utf8"
+    });
+
+    res.send({
+      success: true
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
 });
 
 /////

@@ -15,6 +15,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { todoStyles } from "./styles";
 import Grid from "@material-ui/core/Grid";
 import { merge } from "ramda";
+import Loader from "@material-ui/core/CircularProgress";
 
 class Todo extends React.Component {
   state = {
@@ -56,24 +57,21 @@ class Todo extends React.Component {
   }
 
   handleChange = name => event => {
-    this.setState(
-      {
-        isDirty: true,
-        todo: merge(this.state.todo, {
-          [name]:
-            name === "completed"
-              ? event.target.checked
-                ? "1"
-                : "0"
-              : event.target.value
-        })
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      isDirty: true,
+      todo: merge(this.state.todo, {
+        [name]:
+          name === "completed"
+            ? event.target.checked
+              ? "1"
+              : "0"
+            : event.target.value
+      })
+    });
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, loading } = this.props;
     const { todo } = this.state;
     const { id } = this.props.match && this.props.match.params;
 
@@ -92,6 +90,7 @@ class Todo extends React.Component {
                   >
                     Todo
                   </Typography>
+                  {loading && <Loader size={25} />}
                 </div>
                 <Divider />
               </PaperHeader>
@@ -100,6 +99,7 @@ class Todo extends React.Component {
                   <Grid container>
                     <Grid item xs={6}>
                       <TextField
+                        disabled={loading}
                         id="todo-title"
                         label="Title"
                         className={classes.textField}
@@ -114,6 +114,7 @@ class Todo extends React.Component {
                         className={classes.completedField}
                         control={
                           <Checkbox
+                            disabled={loading}
                             checked={todo && todo.completed === "1"}
                             onChange={this.handleChange("completed")}
                             color="primary"
@@ -126,6 +127,7 @@ class Todo extends React.Component {
                       <TextField
                         id="todo-comment"
                         label="Comment"
+                        disabled={loading}
                         value={todo ? todo.comment : ""}
                         style={{ margin: 8 }}
                         placeholder="add a comment"
@@ -142,10 +144,15 @@ class Todo extends React.Component {
                 </form>
               </PaperBody>
               <PaperFooter>
-                <Button color="secondary" variant="contained">
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  disabled={loading}
+                >
                   Cancel
                 </Button>
                 <Button
+                  disabled={loading}
                   color="primary"
                   variant="contained"
                   onClick={e => (id ? this.updateTodo(e, id) : this.addTodo(e))}

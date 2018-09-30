@@ -52,16 +52,16 @@ const updateTodoEpic = action$ =>
     ofType(updateTodoStart.type),
     mergeMap(({ payload }) =>
       request({
-        url: TODO_URL,
+        url: TODO_UPDATE_URL,
         method: "POST",
         body: payload
       })
     ),
     map(() => ({
-      type: addTodoSuccess.type
+      type: updateTodoSuccess.type
     })),
     catchError(err => ({
-      type: addTodoError.type,
+      type: updateTodoError.type,
       err
     }))
   );

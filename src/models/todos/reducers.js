@@ -28,8 +28,9 @@ const handlers = {
       loading: true,
       todos: assoc("todos", prepend(todo, state.todos), state)
     }),
-  [updateTodoStart.type]: (state, { payload: { todo } }) =>
-    assoc("loading", true, state),
+  [addTodoSuccess.type]: state => assoc("loading", false, state),
+  [updateTodoStart.type]: state => assoc("loading", false, state),
+  [updateTodoSuccess.type]: state => assoc("loading", false, state),
   [fetchTodoStart.type]: state => assoc("loading", true, state),
   [fetchTodoSuccess.type]: (state, { payload: { todo } }) =>
     merge(state, {

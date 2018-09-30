@@ -20,6 +20,7 @@ const FILTERSMAPPING = {
 
 class TodosList extends Component {
   state = {
+    isDirty: false,
     activeFilter: "",
     checked: []
   };
@@ -46,6 +47,7 @@ class TodosList extends Component {
     }
 
     this.setState({
+      isDirty: true,
       checked: newChecked
     });
   };
@@ -81,18 +83,15 @@ class TodosList extends Component {
             >
               My todos
             </Typography>
+            {loading && <Loader size={25} />}
           </div>
           <Divider />
         </PaperHeader>
         <PaperBody>
           <div className={classes.filters}>
-            <Filters
-              filter={this.state.activeFilter}
-              handleFilter={this.handleFilter}
-            />
+            <Filters filter={activeFilter} handleFilter={this.handleFilter} />
           </div>
           <div className={classes.list}>
-            {loading && <Loader className={classes.loader} />}
             <List style={{ opacity: loading ? 0 : 1 }}>
               {_todos &&
                 _todos.map((todo, idx) => {

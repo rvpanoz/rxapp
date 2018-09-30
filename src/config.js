@@ -5,6 +5,7 @@ export default {
   api: {
     todos: `${BASE_URL}/todos`,
     todo: `${BASE_URL}/todo`,
-    create: `${BASE_URL}/todo/create`
+    create: `${BASE_URL}/todo/create`,
+    update: `${BASE_URL}/todo/update`
   }
 };

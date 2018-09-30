@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import ListItem from "@material-ui/core/ListItem";
+import CheckIcon from "@material-ui/icons/Check";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -12,7 +13,7 @@ import config from "config";
 
 const TodoListItem = ({
   classes,
-  todo: { title, id, created_at },
+  todo: { title, id, completed, created_at },
   isChecked,
   handleToggle,
   handleNavigation
@@ -31,11 +32,7 @@ const TodoListItem = ({
       secondary={format(created_at, config.dateFormat)}
     />
     <ListItemSecondaryAction>
-      <Checkbox
-        onChange={e => handleToggle(id)}
-        checked={isChecked}
-        color="primary"
-      />
+      {completed === "1" && <CheckIcon />}
     </ListItemSecondaryAction>
   </ListItem>
 );
