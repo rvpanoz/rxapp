@@ -4,13 +4,6 @@ const paperBodyStyle = {
     flex: "1 1 auto",
     WebkitBoxFlex: "1",
     position: "relative"
-  },
-  paperBodyPlain: {
-    paddingLeft: "5px",
-    paddingRight: "5px"
-  },
-  paperBodyProfile: {
-    marginTop: "15px"
   }
 };
 
