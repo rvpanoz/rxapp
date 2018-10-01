@@ -105,7 +105,7 @@ class Todo extends React.Component {
     const { classes, loading } = this.props;
     const { todo } = this.state;
     const { id } = this.props.match && this.props.match.params;
-
+    console.log(todo);
     return (
       <main className={classes.content}>
         <Grid container>

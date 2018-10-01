@@ -1,3 +1,4 @@
-import TodosList from './TodosList@';
+import TodoList from "./TodosList@";
+import TodoPie from "./TodosPie@";
 
-export default TodosList;
+export { TodoList, TodoPie };

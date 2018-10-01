@@ -98,7 +98,7 @@ app.post("/api/todo/create", function(req, res) {
     const newTodo = Object.assign({}, body, {
       id:
         todos && todos.length
-          ? todos.sort((a, b) => a.id - b.id)[todos.length - 1].id + 1
+          ? parseInt(todos.sort((a, b) => a.id - b.id)[todos.length - 1].id) + 1
           : 1
     });
 
