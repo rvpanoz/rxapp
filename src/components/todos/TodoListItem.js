@@ -32,9 +32,7 @@ const TodoListItem = ({
       secondary={format(created_at, config.dateFormat)}
     />
     <ListItemSecondaryAction>
-      {completed === "1" && (
-        <CheckIcon onMouseOver={e => this._onMouseOver(e)} />
-      )}
+      {completed === "1" && <CheckIcon />}
       {completed === "0" && <ClearIcon />}
     </ListItemSecondaryAction>
   </ListItem>
