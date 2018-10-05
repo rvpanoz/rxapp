@@ -7,7 +7,7 @@ const withTogglableItems = Component =>
       checked: []
     };
 
-    toggle = todoId => {
+    handleToggle = todoId => {
       const { checked } = this.state;
       const currentIndex = checked.indexOf(todoId);
       const placementIndex =
@@ -16,12 +16,19 @@ const withTogglableItems = Component =>
         checked: [
           ...checked.slice(0, placementIndex - 1),
           todoId,
-          ...checked.slice(placementIndex)],
+          ...checked.slice(placementIndex)
+        ]
       });
     };
 
     render() {
-      return <Component {...this.props} checked={this.state.checked} toggle={this.toggle}/>;
+      return (
+        <Component
+          {...this.props}
+          checked={this.state.checked}
+          handleToggle={this.handleToggle}
+        />
+      );
     }
   };
 

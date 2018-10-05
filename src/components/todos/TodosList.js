@@ -21,8 +21,7 @@ const FILTERSMAPPING = {
 class TodosList extends Component {
   state = {
     isDirty: false,
-    activeFilter: "",
-    checked: []
+    activeFilter: ""
   };
 
   constructor(props) {
@@ -35,23 +34,6 @@ class TodosList extends Component {
     });
   };
 
-  handleToggle = todoId => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(todoId);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(todoId);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      isDirty: true,
-      checked: newChecked
-    });
-  };
-
   handleNavigation = todoId => this.props.history.push(`/todo/${todoId}`);
 
   filterTodos = filterName => {
@@ -61,8 +43,8 @@ class TodosList extends Component {
   };
 
   render() {
-    const { checked, activeFilter } = this.state;
-    const { classes, todos, loading } = this.props;
+    const { activeFilter } = this.state;
+    const { checked, classes, todos, loading, handleToggle } = this.props;
 
     //clone todos
     let _todos = todos && Array.isArray(todos) ? todos.slice(0) : [];
@@ -99,7 +81,7 @@ class TodosList extends Component {
                     todo && (
                       <TodosListItem
                         handleNavigation={this.handleNavigation}
-                        handleToggle={this.handleToggle}
+                        handleToggle={handleToggle}
                         key={`todo-${idx}`}
                         todo={todo}
                         isChecked={checked.indexOf(todo.id) > -1}
