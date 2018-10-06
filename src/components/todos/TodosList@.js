@@ -4,7 +4,7 @@ import mapProps from "commons/mapProps";
 import { loading, todos, onFetchTodos } from "models/todos/selectors";
 
 import withFetchTodos from "./withFetchTodos";
-import withTogglableItems from "./withTogglableItems";
+import withToggleableItems from "./withToggleableItems";
 import TodosList from "./TodosList";
 
 export default compose(
@@ -13,5 +13,5 @@ export default compose(
     mapProps({ fetchTodos: onFetchTodos })
   ),
   withFetchTodos,
-  withTogglableItems
+  withToggleableItems
 )(TodosList);
