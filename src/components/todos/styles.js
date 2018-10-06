@@ -4,7 +4,11 @@ export const listStyles = theme => ({
   ...commonStyles,
   list: {
     minHeight: "600px"
-  }
+  },
+  spacer: {
+    flex: "1 1 100%"
+  },
+  toolbar: {}
 });
 
 export const listItemStyles = theme => ({

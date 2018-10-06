@@ -1,19 +1,73 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import cn from "classnames";
 import Loader from "@material-ui/core/CircularProgress";
 import List from "@material-ui/core/List";
 import Paper from "@material-ui/core/Paper";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+import Tooltip from "@material-ui/core/Tooltip";
 import PaperHeader from "../layout/paper/PaperHeader";
 import PaperBody from "../layout/paper/PaperBody";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
 import TodosListItem from "./TodoListItem";
+import DoneIcon from "@material-ui/icons/Done";
 import { listStyles } from "./styles";
 import { withStyles } from "@material-ui/core";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import Checkbox from "@material-ui/core/Checkbox";
+
+const TodoListToolbar = props => {
+  const { classes, numSelected, handleSelectAll } = props;
+
+  return (
+    <React.Fragment>
+      <ListItem key={`todo-toolbar`} dense>
+        <Checkbox
+          tabIndex={-1}
+          disableRipple
+          onChange={e => handleSelectAll(e)}
+        />
+        <ListItemText
+          primary={
+            numSelected > 0 ? (
+              <Typography color="primary" variant="caption">
+                {numSelected} selected
+              </Typography>
+            ) : (
+              <Typography variant="caption">None selected</Typography>
+            )
+          }
+        />
+        <ListItemSecondaryAction>
+          <Toolbar>
+            {numSelected > 0 ? (
+              <Tooltip title="Complete selected">
+                <IconButton aria-label="complete_selected">
+                  <DoneIcon />
+                </IconButton>
+              </Tooltip>
+            ) : null}
+          </Toolbar>
+        </ListItemSecondaryAction>
+      </ListItem>
+      <Divider light={true} />
+    </React.Fragment>
+  );
+};
 
 const TodosList = props => {
-  const { checked, classes, todos, loading, handleToggle } = props;
+  const {
+    checked,
+    classes,
+    todos,
+    loading,
+    handleToggle,
+    handleSelectAll
+  } = props;
 
   return (
     <Paper elevation={2} square className={classes.container}>
@@ -34,6 +88,11 @@ const TodosList = props => {
       <PaperBody>
         <div className={classes.list}>
           <List style={{ opacity: loading ? 0 : 1 }}>
+            <TodoListToolbar
+              numSelected={checked.length}
+              classes={classes}
+              handleSelectAll={handleSelectAll}
+            />
             {todos &&
               todos.map((todo, idx) => {
                 return (
