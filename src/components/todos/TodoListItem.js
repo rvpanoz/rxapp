@@ -30,7 +30,7 @@ const TodoListItem = ({
     key={title}
     dense
   >
-    <Checkbox tabIndex={-1} disableRipple />
+    <Checkbox tabIndex={-1} disableRipple onChange={e => handleToggle(id)} />
     <ListItemText
       primary={title}
       secondary={format(created_at, config.dateFormat)}

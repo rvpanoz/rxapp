@@ -70,7 +70,6 @@ class PieChart extends Component {
       <svg className={classes.svg} ref={this.svgRef}>
         <g transform={this._translateG()}>
           {data.map((d, idx) => {
-            console.log(d);
             return (
               <g className="arc" key={`a${d.data.label}-${idx}`}>
                 <path

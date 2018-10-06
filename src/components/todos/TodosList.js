@@ -12,74 +12,48 @@ import TodosListItem from "./TodoListItem";
 import { listStyles } from "./styles";
 import { withStyles } from "@material-ui/core";
 
-const FILTERSMAPPING = {
-  completed: "1",
-  active: "0"
+const TodosList = props => {
+  const { checked, classes, todos, loading, handleToggle } = props;
+
+  return (
+    <Paper elevation={2} square className={classes.container}>
+      <PaperHeader>
+        <div className={classes.flexContainer}>
+          <Typography
+            className={classes.heading}
+            align="left"
+            gutterBottom={true}
+            variant="headline"
+          >
+            My todos
+          </Typography>
+          {loading && <Loader size={25} />}
+        </div>
+        <Divider />
+      </PaperHeader>
+      <PaperBody>
+        <div className={classes.list}>
+          <List style={{ opacity: loading ? 0 : 1 }}>
+            {todos &&
+              todos.map((todo, idx) => {
+                return (
+                  todo && (
+                    <TodosListItem
+                      handleNavigation={id => props.history.push(`/todo/${id}`)}
+                      handleToggle={handleToggle}
+                      key={`todo-${idx}`}
+                      todo={todo}
+                      isChecked={checked.indexOf(todo.id) > -1}
+                    />
+                  )
+                );
+              })}
+          </List>
+        </div>
+      </PaperBody>
+    </Paper>
+  );
 };
-
-class TodosList extends Component {
-  state = {
-    activeFilter: ""
-  };
-
-  constructor(props) {
-    super(props);
-  }
-
-  handleNavigation = todoId => this.props.history.push(`/todo/${todoId}`);
-
-  render() {
-    const { activeFilter } = this.state;
-    const {
-      checked,
-      classes,
-      todos,
-      loading,
-      filters,
-      handleToggle,
-      handleFilter
-    } = this.props;
-
-    return (
-      <Paper elevation={2} square className={classes.container}>
-        <PaperHeader>
-          <div className={classes.flexContainer}>
-            <Typography
-              className={classes.heading}
-              align="left"
-              gutterBottom={true}
-              variant="headline"
-            >
-              My todos
-            </Typography>
-            {loading && <Loader size={25} />}
-          </div>
-          <Divider />
-        </PaperHeader>
-        <PaperBody>
-          <div className={classes.list}>
-            <List style={{ opacity: loading ? 0 : 1 }}>
-              {todos &&
-                todos.map((todo, idx) => {
-                  return (
-                    todo && (
-                      <TodosListItem
-                        handleNavigation={this.handleNavigation}
-                        handleToggle={handleToggle}
-                        key={`todo-${idx}`}
-                        todo={todo}
-                        isChecked={checked.indexOf(todo.id) > -1}
-                      />
-                    )
-                  );
-                })}
-            </List>
-          </div>
-        </PaperBody>
-      </Paper>
-    );
-  }
-}
 
 TodosList.propTypes = {
   todo: PropTypes.array
