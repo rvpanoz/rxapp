@@ -3,7 +3,7 @@ import React from "react";
 const filterMapStatus = (todos, status) =>
   todos && todos.filter(todo => todo.completed === status).map(todo => todo.id);
 
-const withTogglableItems = Component =>
+const withTogglableItems = (Component, opts) =>
   class TogglableItems extends Component {
     state = {
       _isDirty: false,
@@ -18,20 +18,20 @@ const withTogglableItems = Component =>
           prevState._isDirty === false &&
           nextProps.todos &&
           nextProps.todos.length
-            ? filterMapStatus(nextProps.todos)
+            ? filterMapStatus(nextProps.todos, "1")
             : prevState.checked
       };
     }
 
-    handleToggle = todoId => {
+    handleToggle = id => {
       const { checked } = this.state;
-      const currentIndex = checked.indexOf(todoId);
+      const currentIndex = checked.indexOf(id);
 
       this.setState({
         _isDirty: true,
         checked:
           currentIndex === -1
-            ? [...checked, todoId]
+            ? [...checked, id]
             : Array.concat(
                 checked.slice(0, currentIndex),
                 checked.slice(currentIndex + 1)
@@ -57,7 +57,6 @@ const withTogglableItems = Component =>
         <Component
           {...this.props}
           checked={checked}
-          updateChecked={this.updateChecked}
           handleToggle={this.handleToggle}
           handleSelectAll={this.handleSelectAll}
         />

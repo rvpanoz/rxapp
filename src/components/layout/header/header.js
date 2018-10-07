@@ -21,7 +21,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListIcon from "@material-ui/icons/List";
 import AddIcon from "@material-ui/icons/Add";
 
-function Menu(props) {
+const Menu = props => {
   return (
     <React.Fragment>
       <ListItem>
@@ -38,9 +38,9 @@ function Menu(props) {
       </ListItem>
     </React.Fragment>
   );
-}
+};
 
-function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
+const Header = ({ open, classes, handleDrawerClose, handleDrawerOpen }) => {
   return (
     <React.Fragment>
       <AppBar
@@ -65,7 +65,7 @@ function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
             noWrap
             className={classes.title}
           >
-            RXTodos
+            ReactTodos
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -96,6 +96,6 @@ function Header({ open, classes, handleDrawerClose, handleDrawerOpen }) {
       </Drawer>
     </React.Fragment>
   );
-}
+};
 
 export default withStyles(styles)(Header);

@@ -15,9 +15,6 @@ class Dashboard extends Component {
           <Grid item xs={6} sm={6} lg={4} xl={4}>
             <TodoList {...this.props} />
           </Grid>
-          <Grid item xs={6} sm={6} lg={4} xl={4}>
-            <TodoPie />
-          </Grid>
         </Grid>
       </main>
     );

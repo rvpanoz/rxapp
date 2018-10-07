@@ -13,6 +13,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import TodosListItem from "./TodoListItem";
 import DoneIcon from "@material-ui/icons/Done";
+import ClearIcon from "@material-ui/icons/Clear";
 import { listStyles } from "./styles";
 import { withStyles } from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
@@ -21,7 +22,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 
 const TodoListToolbar = props => {
-  const { classes, numSelected, handleSelectAll } = props;
+  const { numSelected, handleSelectAll } = props;
 
   return (
     <React.Fragment>
@@ -50,7 +51,13 @@ const TodoListToolbar = props => {
                   <DoneIcon />
                 </IconButton>
               </Tooltip>
-            ) : null}
+            ) : (
+              <Tooltip title="Incomplete all">
+                <IconButton aria-label="incomplete_selected">
+                  <ClearIcon />
+                </IconButton>
+              </Tooltip>
+            )}
           </Toolbar>
         </ListItemSecondaryAction>
       </ListItem>

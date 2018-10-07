@@ -11,9 +11,7 @@ import { withStyles } from "@material-ui/core";
 import { listItemStyles } from "./styles";
 import { format } from "date-fns";
 import Checkbox from "@material-ui/core/Checkbox";
-import DoneIcon from "@material-ui/icons/Done";
 import EditIcon from "@material-ui/icons/Edit";
-import ScheduleIcon from "@material-ui/icons/Schedule";
 import config from "config";
 
 const TodoListItem = ({

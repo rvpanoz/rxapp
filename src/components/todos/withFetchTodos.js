@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 
 const withFetchTodos = Component =>
-  class ListContainer extends React.Component {
+  class WithFetchTodos extends Component {
     componentDidMount() {
       this.props.fetchTodos();
     }
