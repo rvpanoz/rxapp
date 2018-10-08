@@ -18,7 +18,7 @@ import Grid from "@material-ui/core/Grid";
 import { merge } from "ramda";
 import Loader from "@material-ui/core/CircularProgress";
 
-class Todo extends React.Component {
+class _Todo extends React.Component {
   state = {
     needSave: false,
     isDirty: false,
@@ -105,7 +105,7 @@ class Todo extends React.Component {
     const { classes, loading } = this.props;
     const { todo } = this.state;
     const { id } = this.props.match && this.props.match.params;
-    console.log(todo);
+
     return (
       <main className={classes.content}>
         <Grid container>
@@ -204,7 +204,78 @@ class Todo extends React.Component {
   }
 }
 
-Todo.propTypes = {
+_Todo.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+const Todo = props => {
+  const { classes } = props;
+
+  return (
+    <main className={classes.content}>
+      <Grid item xs={6} sm={6} lg={4} xl={4}>
+        <Paper elevation={2} square className={classes.container}>
+          <PaperHeader>
+            <div className={classes.flexContainer}>
+              <Typography
+                className={classes.heading}
+                align="left"
+                gutterBottom={true}
+                variant="headline"
+              >
+                Todo
+              </Typography>
+            </div>
+            <Divider />
+          </PaperHeader>
+          <PaperBody>
+            <form noValidate autoComplete="off">
+              <Grid container>
+                <Grid item xs={6}>
+                  <TextField
+                    id="todo-title"
+                    label="Title"
+                    className={classes.textField}
+                    helperText="add title"
+                    margin="normal"
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <FormControlLabel
+                    className={classes.completedField}
+                    control={<Checkbox color="primary" />}
+                    label="Completed"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="todo-comment"
+                    label="Comment"
+                    style={{ margin: 8 }}
+                    placeholder="add a comment"
+                    helperText="your comment"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            </form>
+          </PaperBody>
+          <PaperFooter>
+            <Button color="primary" variant="contained">
+              Save
+            </Button>
+            <Button color="secondary" variant="contained">
+              Back
+            </Button>
+          </PaperFooter>
+        </Paper>
+      </Grid>
+    </main>
+  );
+};
+
 export default withStyles(todoStyles)(Todo);

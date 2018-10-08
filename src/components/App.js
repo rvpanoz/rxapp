@@ -17,11 +17,18 @@ const NoMatch = props => {
   );
 };
 
+function applyStyles(styles, prevStyle) {
+  return Object.assign(prevStyle, styles);
+}
 class App extends Component {
   state = {
     drawerOpen: true
   };
 
+  constructor(props) {
+    super(props);
+    this.appRef = React.createRef();
+  }
   handleDrawerOpen = () => {
     this.setState({ drawerOpen: true });
   };
@@ -34,7 +41,7 @@ class App extends Component {
     const { drawerOpen } = this.state;
 
     return (
-      <div id="app" style={{ display: "flex" }}>
+      <div ref={this.appRef} id="app" style={{ display: "flex" }}>
         <CssBaseline />
         <Router>
           <React.Fragment>
