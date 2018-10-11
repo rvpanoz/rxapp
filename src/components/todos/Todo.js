@@ -209,7 +209,8 @@ _Todo.propTypes = {
 };
 
 const Todo = props => {
-  const { classes } = props;
+  const { classes, add, update, todo, open, message } = props;
+  const { id } = props.match && props.match.params;
 
   return (
     <main className={classes.content}>
@@ -237,11 +238,13 @@ const Todo = props => {
                     label="Title"
                     className={classes.textField}
                     helperText="add title"
+                    value={todo ? todo.title : ""}
                     margin="normal"
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <FormControlLabel
+                    checked={todo && todo.completed === "1"}
                     className={classes.completedField}
                     control={<Checkbox color="primary" />}
                     label="Completed"
@@ -252,6 +255,7 @@ const Todo = props => {
                     id="todo-comment"
                     label="Comment"
                     style={{ margin: 8 }}
+                    value={todo ? todo.comment : ""}
                     placeholder="add a comment"
                     helperText="your comment"
                     fullWidth
@@ -265,17 +269,26 @@ const Todo = props => {
             </form>
           </PaperBody>
           <PaperFooter>
-            <Button color="primary" variant="contained">
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={e => (id ? update(e, id) : add(e))}
+            >
               Save
             </Button>
             <Button color="secondary" variant="contained">
               Back
             </Button>
           </PaperFooter>
+          <Notifier open={open} message={message} />
         </Paper>
       </Grid>
     </main>
   );
+};
+
+Todo.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(todoStyles)(Todo);

@@ -11,7 +11,8 @@ import {
 } from "models/todos/selectors";
 
 import withLoading from "./withLoading";
-import withHandlers from "./withHandlers";
+import withLoadById from "./withLoadById";
+import withMessages from "./withMessages";
 import Todo from "./Todo";
 
 export default compose(
@@ -19,8 +20,7 @@ export default compose(
     mapProps({ loading, todo }),
     mapProps({ add: onAddTodo, update: onUpdateTodo, load: onFetchTodo })
   ),
-  withHandlers({
-    log: () => console.log(...args)
-  }),
+  withMessages,
+  withLoadById,
   withLoading
 )(Todo);
