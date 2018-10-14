@@ -1,9 +1,8 @@
 import { ofType } from "redux-observable";
 import { combineEpics } from "redux-observable";
-import { compose } from "ramda";
 import { request } from "commons/utils";
 import { map, mergeMap, catchError } from "rxjs/operators";
-
+import { of } from "rxjs";
 import config from "config";
 
 import {
@@ -41,10 +40,12 @@ const addTodoEpic = action$ =>
     map(() => ({
       type: addTodoSuccess.type
     })),
-    catchError(err => ({
-      type: addTodoError.type,
-      err
-    }))
+    catchError(err =>
+      of({
+        type: addTodoError.type,
+        err
+      })
+    )
   );
 
 const updateTodoEpic = action$ =>
@@ -60,10 +61,12 @@ const updateTodoEpic = action$ =>
     map(() => ({
       type: updateTodoSuccess.type
     })),
-    catchError(err => ({
-      type: updateTodoError.type,
-      err
-    }))
+    catchError(err =>
+      of({
+        type: updateTodoError.type,
+        err
+      })
+    )
   );
 
 const fetchTodoEpic = action$ =>
@@ -85,10 +88,12 @@ const fetchTodoEpic = action$ =>
         }
       };
     }),
-    catchError(err => ({
-      type: fetchTodoError.type,
-      err
-    }))
+    catchError(err =>
+      of({
+        type: fetchTodoError.type,
+        err
+      })
+    )
   );
 
 const fetchTodosEpic = action$ =>
@@ -110,10 +115,12 @@ const fetchTodosEpic = action$ =>
         }
       };
     }),
-    catchError(err => ({
-      type: fetchTodosError.type,
-      err
-    }))
+    catchError(err =>
+      of({
+        type: fetchTodosError.type,
+        err
+      })
+    )
   );
 
 export default combineEpics(
