@@ -31,11 +31,13 @@ const addTodoEpic = action$ =>
   action$.pipe(
     ofType(addTodoStart.type),
     mergeMap(({ payload }) =>
-      request({
-        url: TODO_CREATE_URL,
-        method: "POST",
-        body: payload
-      })
+      of(
+        request({
+          url: TODO_CREATE_URL,
+          method: "POST",
+          body: payload
+        })
+      )
     ),
     map(() => ({
       type: addTodoSuccess.type
@@ -52,11 +54,13 @@ const updateTodoEpic = action$ =>
   action$.pipe(
     ofType(updateTodoStart.type),
     mergeMap(({ payload }) =>
-      request({
-        url: TODO_UPDATE_URL,
-        method: "POST",
-        body: payload
-      })
+      of(
+        request({
+          url: TODO_UPDATE_URL,
+          method: "POST",
+          body: payload
+        })
+      )
     ),
     map(() => ({
       type: updateTodoSuccess.type
@@ -73,10 +77,12 @@ const fetchTodoEpic = action$ =>
   action$.pipe(
     ofType(fetchTodoStart.type),
     mergeMap(({ payload }) =>
-      request({
-        url: `${TODO_URL}/${payload}`,
-        method: "GET"
-      })
+      of(
+        request({
+          url: `${TODO_URL}/${payload}`,
+          method: "GET"
+        })
+      )
     ),
     map(ajaxResponse => {
       const { response } = ajaxResponse;
@@ -100,10 +106,12 @@ const fetchTodosEpic = action$ =>
   action$.pipe(
     ofType(fetchTodosStart.type),
     mergeMap(action =>
-      request({
-        url: TODOS_URL,
-        method: "GET"
-      })
+      of(
+        request({
+          url: TODOS_URL,
+          method: "GET"
+        })
+      )
     ),
     map(ajaxResponse => {
       const { response } = ajaxResponse;
