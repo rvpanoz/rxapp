@@ -5,16 +5,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import paperHeaderStyle from "./paperHeaderStyle";
 
 function paperHeader({ ...props }) {
-  const {
-    classes,
-    className,
-    children,
-    color,
-    plain,
-    stats,
-    icon,
-    ...rest
-  } = props;
+  const { classes, className, children, color, icon, ...rest } = props;
   const paperHeaderClasses = classNames({
     [classes.paperHeader]: true,
     [classes[color + "paperHeader"]]: color,
