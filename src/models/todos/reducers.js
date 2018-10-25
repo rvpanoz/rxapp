@@ -41,11 +41,13 @@ const handlers = {
       loading: true,
       todos: state.todos
     }),
-  [fetchTodosSuccess.type]: (state, { payload: { todos } }) =>
-    merge(state, {
+  [fetchTodosSuccess.type]: (state, { payload: { todos } }) => {
+    return merge(state, {
       loading: false,
       todos
-    }),
+    });
+  },
+
   [fetchTodosError.type]: (state, { payload: { error } }) =>
     assoc("error", error, state),
   [fetchTodoError.type]: (state, { payload: { error } }) =>

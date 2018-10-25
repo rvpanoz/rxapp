@@ -15,13 +15,12 @@ const onUpdateTodo = dispatch => todo => dispatch(updateTodoStart(todo));
 const onUpdateTodoSuccess = dispatch => () => dispatch(updateTodoSuccess());
 const onFetchTodo = dispatch => todoId => dispatch(fetchTodoStart(todoId));
 const onFetchTodos = dispatch => () => dispatch(fetchTodosStart());
-const onFetchTodosSuccess = dispatch => todos => {
-  return dispatch(
+const onFetchTodosSuccess = dispatch => todos =>
+  dispatch(
     fetchTodosSuccess({
       payload: todos
     })
   );
-};
 
 export {
   loading,

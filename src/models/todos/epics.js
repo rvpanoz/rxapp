@@ -115,18 +115,18 @@ const fetchTodosEpic = action$ =>
     ),
     map(ajaxResponse => {
       const { response } = ajaxResponse;
-
+      console.log(response);
       return {
         type: fetchTodosSuccess.type,
         payload: {
-          todos: response.data
+          todos: (response && response.data) || []
         }
       };
     }),
-    catchError(err =>
+    catchError(error =>
       of({
         type: fetchTodosError.type,
-        err
+        error
       })
     )
   );
