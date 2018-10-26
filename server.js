@@ -1,26 +1,10 @@
-const fs = require("fs");
-const path = require("path");
-const express = require("express");
+const fs = require('fs');
+const path = require('path');
+const express = require('express');
 const app = express();
-<<<<<<< HEAD
 const port = process.env.PORT || 3001;
-const bodyParser = require("body-parser");
-const merge = require("ramda").merge;
-=======
-const mongoose = require("mongoose");
-const dbName = "xmongo_db";
-const mongodbUrl = `mongodb://rvpanoz:demo123@ds125402.mlab.com:25402/${dbName}`;
-
-mongoose
-  .connect(
-    mongodbUrl,
-    {
-      useNewUrlParser: true
-    }
-  )
-  .then(db => console.log("db connected"))
-  .catch(err => console.log(err));
->>>>>>> EXP# working with mongoose
+const bodyParser = require('body-parser');
+const merge = require('ramda').merge;
 
 //MIDDLEWARES
 
@@ -30,27 +14,27 @@ app.use(bodyParser.json());
 // to support URL-encoded bodies
 app.use(
   bodyParser.urlencoded({
-    extended: true
+    extended: true,
   })
 );
 
 //HEADERS
 app.use(function(req, res, next) {
   res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
   );
   res.set({
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json"
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
   });
   next();
 });
 
 //ROUTES
-app.get("/api/todos", function(req, res) {
-  const TODOS = fs.readFileSync("./db.json", {
-    encoding: "utf8"
+app.get('/api/todos', function(req, res) {
+  const TODOS = fs.readFileSync('./db.json', {
+    encoding: 'utf8',
   });
 
   try {
@@ -59,14 +43,14 @@ app.get("/api/todos", function(req, res) {
     if (!todos) {
       return res.send({
         success: true,
-        data: []
+        data: [],
       });
     }
 
     setTimeout(() => {
       res.send({
         success: true,
-        data: todos
+        data: todos,
       });
     }, 1500);
   } catch (error) {
@@ -74,26 +58,26 @@ app.get("/api/todos", function(req, res) {
   }
 });
 
-app.get("/api/todo/:id", function(req, res) {
+app.get('/api/todo/:id', function(req, res) {
   const { id } = req.params;
 
   try {
-    const TODOS = fs.readFileSync("./db.json", {
-      encoding: "utf8"
+    const TODOS = fs.readFileSync('./db.json', {
+      encoding: 'utf8',
     });
     const { todos } = JSON.parse(TODOS);
 
     if (!todos || !Array.isArray(todos)) {
       return res.send({
         success: true,
-        data: []
+        data: [],
       });
     }
 
     setTimeout(() => {
       res.send({
         success: true,
-        data: todos.filter(todo => todo.id === id)
+        data: todos.filter(todo => todo.id === id),
       });
     }, 1500);
   } catch (error) {
@@ -101,12 +85,12 @@ app.get("/api/todo/:id", function(req, res) {
   }
 });
 
-app.post("/api/todo/create", function(req, res) {
+app.post('/api/todo/create', function(req, res) {
   const { body } = req;
 
   try {
-    const TODOS = fs.readFileSync("./db.json", {
-      encoding: "utf8"
+    const TODOS = fs.readFileSync('./db.json', {
+      encoding: 'utf8',
     });
     const data = JSON.parse(TODOS);
     const { todos } = data;
@@ -115,32 +99,32 @@ app.post("/api/todo/create", function(req, res) {
       id:
         todos && todos.length
           ? parseInt(todos.sort((a, b) => a.id - b.id)[todos.length - 1].id) + 1
-          : 1
+          : 1,
     });
 
     const newData = Object.assign({}, data, {
-      todos: [...data.todos, newTodo]
+      todos: [...data.todos, newTodo],
     });
 
-    fs.writeFileSync("./db.json", JSON.stringify(newData), {
-      encoding: "utf8"
+    fs.writeFileSync('./db.json', JSON.stringify(newData), {
+      encoding: 'utf8',
     });
 
     res.send({
-      success: true
+      success: true,
     });
   } catch (error) {
     throw new Error(error);
   }
 });
 
-app.post("/api/todo/update", function(req, res) {
+app.post('/api/todo/update', function(req, res) {
   const { body } = req;
   const { id } = body || {};
 
   try {
-    const TODOS = fs.readFileSync("./db.json", {
-      encoding: "utf8"
+    const TODOS = fs.readFileSync('./db.json', {
+      encoding: 'utf8',
     });
     const data = JSON.parse(TODOS);
     const { todos } = data;
@@ -150,20 +134,20 @@ app.post("/api/todo/update", function(req, res) {
     if (!todo) {
       return res.send({
         success: true,
-        data: null
+        data: null,
       });
     }
 
     const newData = Object.assign({}, data, {
-      todos: todos.map(todo => (todo.id === id ? merge(todo, body) : todo))
+      todos: todos.map(todo => (todo.id === id ? merge(todo, body) : todo)),
     });
 
-    fs.writeFileSync("./db.json", JSON.stringify(newData), {
-      encoding: "utf8"
+    fs.writeFileSync('./db.json', JSON.stringify(newData), {
+      encoding: 'utf8',
     });
 
     res.send({
-      success: true
+      success: true,
     });
   } catch (error) {
     throw new Error(error);
