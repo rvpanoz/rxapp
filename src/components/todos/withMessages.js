@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
-const withMessages = Component => {
-  return class WithMessages extends React.Component {
+const withMessages = Component =>
+  class WithMessages extends React.Component {
     state = {
-      messages: [],
+      messages: []
     };
 
     addMessage = message => {
       const { messages } = this.state;
 
       this.setState({
-        messages: [...messages, message],
+        messages: [...messages, message]
       });
     };
 
@@ -26,6 +26,5 @@ const withMessages = Component => {
       );
     }
   };
-};
 
 export default withMessages;

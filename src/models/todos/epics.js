@@ -1,7 +1,8 @@
 import { ofType } from "redux-observable";
 import { combineEpics } from "redux-observable";
-import { request } from "commons/utils";
+import { request, callServer } from "commons/utils";
 import { map, mergeMap, catchError } from "rxjs/operators";
+import { compose } from "recompose";
 import { of } from "rxjs";
 import config from "config";
 
@@ -105,30 +106,43 @@ const fetchTodoEpic = action$ =>
 const fetchTodosEpic = action$ =>
   action$.pipe(
     ofType(fetchTodosStart.type),
-    mergeMap(action =>
-      of(
-        request({
-          url: TODOS_URL,
-          method: "GET"
+    callServer({
+      url: TODOS_URL,
+      successActionCreator: compose(
+        fetchTodosSuccess,
+        ajaxResponse => ({
+          todos: ajaxResponse.response.success && ajaxResponse.response.data
         })
+      ),
+      errorActionCreator: compose(
+        fetchTodosError,
+        error => ({ error })
       )
-    ),
-    map(ajaxResponse => {
-      const { response } = ajaxResponse;
-      console.log(response);
-      return {
-        type: fetchTodosSuccess.type,
-        payload: {
-          todos: (response && response.data) || []
-        }
-      };
-    }),
-    catchError(error =>
-      of({
-        type: fetchTodosError.type,
-        error
-      })
-    )
+    })
+    // mergeMap(action =>
+    //   of(
+    //     request({
+    //       url: TODOS_URL,
+    //       method: "GET"
+    //     })
+    //   )
+    // ),
+    // map(ajaxResponse => {
+    //   const { response } = ajaxResponse;
+
+    //   return {
+    //     type: fetchTodosSuccess.type,
+    //     payload: {
+    //       todos: (response && response.data) || []
+    //     }
+    //   };
+    // }),
+    // catchError(error =>
+    //   of({
+    //     type: fetchTodosError.type,
+    //     error
+    //   })
+    // )
   );
 
 export default combineEpics(

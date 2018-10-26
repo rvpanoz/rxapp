@@ -11,7 +11,6 @@ import {
 } from "models/todos/selectors";
 
 import withLoading from "./withLoading";
-import withLoadById from "./withLoadById";
 import withMessages from "./withMessages";
 import Todo from "./Todo";
 
@@ -21,6 +20,5 @@ export default compose(
     mapProps({ add: onAddTodo, update: onUpdateTodo, load: onFetchTodo })
   ),
   withMessages,
-  withLoadById,
   withLoading
 )(Todo);

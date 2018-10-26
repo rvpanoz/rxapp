@@ -85,6 +85,8 @@ class _Todo extends React.Component {
     if (id) {
       this.props.load(id);
     }
+
+    console.log(this.props.addMessage);
   }
 
   handleChange = name => event => {
