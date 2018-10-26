@@ -1,26 +1,27 @@
-import React from "react";
+import React from 'react';
 
 const withMessages = Component => {
   return class WithMessages extends React.Component {
     state = {
-      open: false,
-      message: null
+      messages: [],
     };
-    toggleNotifier = (open, message) => {
+
+    addMessage = message => {
+      const { messages } = this.state;
+
       this.setState({
-        open,
-        message
+        messages: [...messages, message],
       });
     };
+
     render() {
-      const { open, message } = this.state;
+      const { messages } = this.state;
 
       return (
         <Component
           {...this.props}
-          open={open}
-          message={message}
-          toggleNotifier={this.toggleNotifier}
+          addMessage={this.addMessage}
+          messages={messages}
         />
       );
     }

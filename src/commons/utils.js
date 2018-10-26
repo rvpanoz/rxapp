@@ -2,16 +2,15 @@
  * @module Utils
  * @desc Utilities and helpers
  */
-import { ajax } from "rxjs/ajax";
-
-import { merge } from "ramda";
+import { ajax } from 'rxjs/ajax';
+import { merge } from 'ramda';
 
 const request = params => {
   const options = merge(
     {
-      method: params.method || "GET",
-      responseType: "json",
-      withCredentials: false
+      method: params.method || 'GET',
+      responseType: 'json',
+      withCredentials: false,
     },
     params
   );

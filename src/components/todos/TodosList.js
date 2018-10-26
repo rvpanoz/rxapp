@@ -1,28 +1,29 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import cn from "classnames";
-import Loader from "@material-ui/core/CircularProgress";
-import List from "@material-ui/core/List";
-import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
-import Tooltip from "@material-ui/core/Tooltip";
-import PaperHeader from "../layout/paper/PaperHeader";
-import PaperBody from "../layout/paper/PaperBody";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import TodosListItem from "./TodoListItem";
-import DoneIcon from "@material-ui/icons/Done";
-import ClearIcon from "@material-ui/icons/Clear";
-import { listStyles } from "./styles";
-import { withStyles } from "@material-ui/core";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import cn from 'classnames';
+import Loader from '@material-ui/core/CircularProgress';
+import List from '@material-ui/core/List';
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
+import PaperHeader from '../layout/paper/PaperHeader';
+import PaperBody from '../layout/paper/PaperBody';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import TodosListItem from './TodoListItem';
+import DoneIcon from '@material-ui/icons/Done';
+import ClearIcon from '@material-ui/icons/Clear';
+import { listStyles } from './styles';
+import { withStyles } from '@material-ui/core';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const TodoListToolbar = props => {
-  const { numSelected, handleSelectAll } = props;
+  const { numSelected, handleSelectAll, addMessage } = props;
 
   return (
     <React.Fragment>
@@ -58,6 +59,9 @@ const TodoListToolbar = props => {
                 </IconButton>
               </Tooltip>
             )}
+            <Button onClick={e => addMessage(e.target.tagName)}>
+              Add message
+            </Button>
           </Toolbar>
         </ListItemSecondaryAction>
       </ListItem>
@@ -72,10 +76,12 @@ const TodosList = props => {
     classes,
     todos,
     loading,
+    addMessage,
+    messages,
     handleToggle,
-    handleSelectAll
+    handleSelectAll,
   } = props;
-
+  console.log(props);
   return (
     <Paper elevation={2} square className={classes.container}>
       <PaperHeader>
@@ -98,6 +104,7 @@ const TodosList = props => {
             <TodoListToolbar
               numSelected={checked.length}
               classes={classes}
+              addMessage={addMessage}
               handleSelectAll={handleSelectAll}
             />
             {todos &&
@@ -122,7 +129,7 @@ const TodosList = props => {
 };
 
 TodosList.propTypes = {
-  todo: PropTypes.array
+  todo: PropTypes.array,
 };
 
 export default withStyles(listStyles)(TodosList);
