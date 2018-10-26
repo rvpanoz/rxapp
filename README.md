@@ -1,4 +1,4 @@
-# rxapp - Simple Todo app using redux-observable and rxjs
+# Todos - Todo app using React best practices
 
 
 install application dependencies:
