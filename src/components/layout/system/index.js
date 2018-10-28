@@ -1,3 +1,4 @@
 import Notifier from "./Notifier";
+import NoMatch from "./NoMatch";
 
-export { Notifier };
+export { NoMatch, Notifier };

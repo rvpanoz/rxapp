@@ -1,17 +1,12 @@
-# rxapp - Simple Todo app using redux-observable and rxjs
+# Todos
 
 install application dependencies:
 `npm i`
 
-start the http server:
-`npm run start-server.js`
-
 run the app:
-`npm start`
+`npm run start`
 
-preview the app: `localhost:8080`
+start the express http server:
+`node server.js`
 
-<div>
-<img align="center" width="100%" height="100%"
-     title="app" src="./app.png">
-     </div>
+navigate to `localhost:8080` to preview the app.

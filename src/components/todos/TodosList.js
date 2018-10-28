@@ -23,7 +23,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 
 const TodoListToolbar = props => {
-  const { numSelected, handleSelectAll, addMessage } = props;
+  const { numSelected, handleSelectAll } = props;
 
   return (
     <React.Fragment>
@@ -59,9 +59,6 @@ const TodoListToolbar = props => {
                 </IconButton>
               </Tooltip>
             )}
-            <Button onClick={e => addMessage(e.target.tagName)}>
-              Add message
-            </Button>
           </Toolbar>
         </ListItemSecondaryAction>
       </ListItem>
@@ -76,8 +73,6 @@ const TodosList = props => {
     classes,
     todos,
     loading,
-    addMessage,
-    messages,
     handleToggle,
     handleSelectAll
   } = props;
@@ -104,7 +99,6 @@ const TodosList = props => {
             <TodoListToolbar
               numSelected={checked.length}
               classes={classes}
-              addMessage={addMessage}
               handleSelectAll={handleSelectAll}
             />
             {todos &&
