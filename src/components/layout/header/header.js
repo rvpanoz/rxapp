@@ -40,7 +40,7 @@ const Menu = props => {
   );
 };
 
-const Header = ({ open, classes, handleDrawerClose, handleDrawerOpen }) => {
+const Header = ({ open, classes, toggleDrawer }) => {
   return (
     <React.Fragment>
       <AppBar
@@ -51,7 +51,7 @@ const Header = ({ open, classes, handleDrawerClose, handleDrawerOpen }) => {
           <IconButton
             color="inherit"
             aria-label="Open drawer"
-            onClick={e => handleDrawerOpen(e)}
+            onClick={e => toggleDrawer()}
             className={classnames(
               classes.menuButton,
               open && classes.menuButtonHidden
@@ -85,7 +85,7 @@ const Header = ({ open, classes, handleDrawerClose, handleDrawerOpen }) => {
         open={open}
       >
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={e => handleDrawerClose(e)}>
+          <IconButton onClick={e => toggleDrawer()}>
             <ChevronLeftIcon />
           </IconButton>
         </div>

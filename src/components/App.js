@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, Component } from "react";
+import React, { lazy, Suspense, useState, Component } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { withStyles } from "@material-ui/core";
 import { NoMatch } from "components/layout/system";
@@ -8,7 +8,43 @@ import Header from "components/layout/header";
 import Dashboard from "components/dashboard";
 import Todo from "components/todos/Todo@";
 
-class App extends Component {
+/**
+ * Using `useState` hook
+ * @param {*} props
+ */
+
+function App(props) {
+  const { classes } = props;
+  const [drawerOpen, toggleDrawer] = useState(false);
+
+  function toggleDrawerOpen() {
+    toggleDrawer(!drawerOpen);
+  }
+
+  return (
+    <div className={classes.app}>
+      <CssBaseline />
+      <ErrorBoundary>
+        <Router>
+          <React.Fragment>
+            <Header toggleDrawer={toggleDrawerOpen} open={drawerOpen} />
+            <Switch>
+              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/create" component={Todo} />
+              <Route path="/todo/:id" component={Todo} />
+              <Route component={NoMatch} />
+            </Switch>
+          </React.Fragment>
+        </Router>
+      </ErrorBoundary>
+    </div>
+  );
+}
+
+/**
+ * Class approach
+ */
+class _App extends Component {
   state = {
     drawerOpen: true
   };

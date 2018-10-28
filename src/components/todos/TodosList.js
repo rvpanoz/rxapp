@@ -96,7 +96,7 @@ const TodosList = props => {
         <div className={classes.list}>
           <List style={{ opacity: loading ? 0 : 1 }}>
             <TodoListToolbar
-              numSelected={checked.length}
+              numSelected={(checked && checked.length) || 0}
               classes={classes}
               handleSelectAll={handleSelectAll}
             />
@@ -109,7 +109,7 @@ const TodosList = props => {
                       handleToggle={handleToggle}
                       key={`todo-${idx}`}
                       todo={todo}
-                      isChecked={checked.indexOf(todo.id) > -1}
+                      isChecked={checked && checked.indexOf(todo.id) > -1}
                     />
                   )
                 );

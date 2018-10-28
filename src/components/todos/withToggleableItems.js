@@ -3,7 +3,7 @@ import React from "react";
 const filterMapStatus = (todos, status) =>
   todos && todos.filter(todo => todo.completed === status).map(todo => todo.id);
 
-const withTogglableItems = (Component, opts) =>
+const withTogglableItems = Component =>
   class TogglableItems extends Component {
     state = {
       _isDirty: false,

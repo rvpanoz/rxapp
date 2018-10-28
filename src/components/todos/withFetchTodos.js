@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 
-const withFetchTodos = Component =>
+const withFetchTodos = BaseComponent =>
   class WithFetchTodos extends Component {
+    constructor(props) {
+      super(props);
+    }
     componentDidMount() {
       this.props.fetchTodos();
     }
@@ -9,7 +12,9 @@ const withFetchTodos = Component =>
     render() {
       const { todos, loading, history } = this.props;
 
-      return <Component todos={todos} loading={loading} history={history} />;
+      return (
+        <BaseComponent todos={todos} loading={loading} history={history} />
+      );
     }
   };
 
