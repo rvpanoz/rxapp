@@ -10,8 +10,8 @@ import {
   onFetchTodo
 } from "models/todos/selectors";
 
-import withLoading from "./withLoading";
-import withMessages from "./withMessages";
+import withLoading from "commons/hocs/withLoading";
+import withMessages from "commons/hocs/withMessages";
 import Todo from "./Todo";
 
 export default compose(

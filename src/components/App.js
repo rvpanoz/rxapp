@@ -1,11 +1,13 @@
-import React, { Component } from "react";
+import React, { lazy, Suspense, Component } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
+import { withStyles } from "@material-ui/core";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import ErrorBoundary from "commons/ErrorBoundary";
+
 import Header from "components/layout/header";
 import Dashboard from "components/dashboard";
 import Todo from "components/todos/Todo@";
-
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 const NoMatch = props => {
   return (
@@ -17,9 +19,6 @@ const NoMatch = props => {
   );
 };
 
-function applyStyles(styles, prevStyle) {
-  return Object.assign(prevStyle, styles);
-}
 class App extends Component {
   state = {
     drawerOpen: true
@@ -38,29 +37,40 @@ class App extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { drawerOpen } = this.state;
 
     return (
-      <div ref={this.appRef} id="app" style={{ display: "flex" }}>
+      <div ref={this.appRef} className={classes.app}>
         <CssBaseline />
-        <Router>
-          <React.Fragment>
-            <Header
-              handleDrawerClose={this.handleDrawerClose}
-              handleDrawerOpen={this.handleDrawerOpen}
-              open={drawerOpen}
-            />
-            <Switch>
-              <Route exact path="/" component={Dashboard} />
-              <Route exact path="/create" component={Todo} />
-              <Route path="/todo/:id" component={Todo} />
-              <Route component={NoMatch} />
-            </Switch>
-          </React.Fragment>
-        </Router>
+        <ErrorBoundary>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Router>
+              <React.Fragment>
+                <Header
+                  handleDrawerClose={this.handleDrawerClose}
+                  handleDrawerOpen={this.handleDrawerOpen}
+                  open={drawerOpen}
+                />
+                <Switch>
+                  <Route exact path="/" component={Dashboard} />
+                  <Route exact path="/create" component={Todo} />
+                  <Route path="/todo/:id" component={Todo} />
+                  <Route component={NoMatch} />
+                </Switch>
+              </React.Fragment>
+            </Router>
+          </Suspense>
+        </ErrorBoundary>
       </div>
     );
   }
 }
 
-export default App;
+const styles = theme => ({
+  app: {
+    display: "flex"
+  }
+});
+
+export default withStyles(styles)(App);

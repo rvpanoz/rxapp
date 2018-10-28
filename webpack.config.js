@@ -23,7 +23,7 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src/index.html"),
-      title: "A silly app"
+      title: "Todo app"
     })
   ],
   module: {
