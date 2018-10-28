@@ -1,5 +1,4 @@
-# Todos - Todo app using React best practices
-
+# Todos 
 
 install application dependencies:
 `npm i`
