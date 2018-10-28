@@ -1,7 +1,7 @@
 import { ofType } from "redux-observable";
 import { combineEpics } from "redux-observable";
 import { request, callServer } from "commons/utils";
-import { map, mergeMap, catchError } from "rxjs/operators";
+import { map, mergeMap, switchMap, catchError } from "rxjs/operators";
 import { compose } from "recompose";
 import { of } from "rxjs";
 import config from "config";
@@ -32,13 +32,11 @@ const addTodoEpic = action$ =>
   action$.pipe(
     ofType(addTodoStart.type),
     mergeMap(({ payload }) =>
-      of(
-        request({
-          url: TODO_CREATE_URL,
-          method: "POST",
-          body: payload
-        })
-      )
+      request({
+        url: TODO_CREATE_URL,
+        method: "POST",
+        body: payload
+      })
     ),
     map(() => ({
       type: addTodoSuccess.type
@@ -55,13 +53,11 @@ const updateTodoEpic = action$ =>
   action$.pipe(
     ofType(updateTodoStart.type),
     mergeMap(({ payload }) =>
-      of(
-        request({
-          url: TODO_UPDATE_URL,
-          method: "POST",
-          body: payload
-        })
-      )
+      request({
+        url: TODO_UPDATE_URL,
+        method: "POST",
+        body: payload
+      })
     ),
     map(() => ({
       type: updateTodoSuccess.type
@@ -78,12 +74,10 @@ const fetchTodoEpic = action$ =>
   action$.pipe(
     ofType(fetchTodoStart.type),
     mergeMap(({ payload }) =>
-      of(
-        request({
-          url: `${TODO_URL}/${payload}`,
-          method: "GET"
-        })
-      )
+      request({
+        url: `${TODO_URL}/${payload}`,
+        method: "GET"
+      })
     ),
     map(ajaxResponse => {
       const { response } = ajaxResponse;
@@ -106,43 +100,28 @@ const fetchTodoEpic = action$ =>
 const fetchTodosEpic = action$ =>
   action$.pipe(
     ofType(fetchTodosStart.type),
-    callServer({
-      url: TODOS_URL,
-      successActionCreator: compose(
-        fetchTodosSuccess,
-        ajaxResponse => ({
-          todos: ajaxResponse.response.success && ajaxResponse.response.data
-        })
-      ),
-      errorActionCreator: compose(
-        fetchTodosError,
-        error => ({ error })
-      )
-    })
-    // mergeMap(action =>
-    //   of(
-    //     request({
-    //       url: TODOS_URL,
-    //       method: "GET"
-    //     })
-    //   )
-    // ),
-    // map(ajaxResponse => {
-    //   const { response } = ajaxResponse;
+    switchMap(action =>
+      request({
+        url: TODOS_URL,
+        method: "GET"
+      })
+    ),
+    map(ajaxResponse => {
+      const { response } = ajaxResponse;
 
-    //   return {
-    //     type: fetchTodosSuccess.type,
-    //     payload: {
-    //       todos: (response && response.data) || []
-    //     }
-    //   };
-    // }),
-    // catchError(error =>
-    //   of({
-    //     type: fetchTodosError.type,
-    //     error
-    //   })
-    // )
+      return {
+        type: fetchTodosSuccess.type,
+        payload: {
+          todos: (response && response.data) || []
+        }
+      };
+    }),
+    catchError(error =>
+      of({
+        type: fetchTodosError.type,
+        error
+      })
+    )
   );
 
 export default combineEpics(

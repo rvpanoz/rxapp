@@ -6,6 +6,8 @@ import { ajax } from "rxjs/ajax";
 import { merge } from "ramda";
 import { map, switchMap, catchError, throwError } from "rxjs/operators";
 
+const noop = () => {};
+
 const request = params => {
   const options = merge(
     {
@@ -20,8 +22,6 @@ const request = params => {
     ajax(options).subscribe(data => resolve(data), error => reject(error))
   );
 };
-
-const noop = () => {};
 
 const callServer = opts => $action => {
   const crossDomain = opts && !!opts.crossDomain;

@@ -10,7 +10,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import PaperHeader from "../layout/paper/PaperHeader";
 import PaperBody from "../layout/paper/PaperBody";
 import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import TodosListItem from "./TodoListItem";
 import DoneIcon from "@material-ui/icons/Done";
