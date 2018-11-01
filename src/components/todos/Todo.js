@@ -18,7 +18,8 @@ import Grid from "@material-ui/core/Grid";
 import { merge } from "ramda";
 import Loader from "@material-ui/core/CircularProgress";
 
-class _Todo extends React.Component {
+class Todo extends React.Component {
+  //TODO: use useState
   state = {
     needSave: false,
     isDirty: false,
@@ -39,6 +40,10 @@ class _Todo extends React.Component {
       ...prevState,
       todo: id && !isDirty ? nextProps.todo : prevState.todo
     };
+  }
+
+  constructor(props) {
+    super(props);
   }
 
   addTodo = e => {
@@ -64,6 +69,7 @@ class _Todo extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
+    console.log("Todo updated");
     if (
       this.props.loading === false &&
       this.props.loading !== prevProps.loading
@@ -80,13 +86,12 @@ class _Todo extends React.Component {
   }
 
   componentDidMount() {
+    console.log("Todo mounted");
     const { id } = this.props.match && this.props.match.params;
-
+    console.log(this.props.match);
     if (id) {
       this.props.load(id);
     }
-
-    console.log(this.props.addMessage);
   }
 
   handleChange = name => event => {
@@ -104,6 +109,7 @@ class _Todo extends React.Component {
   };
 
   render() {
+    console.log("Todo rendered");
     const { classes, loading } = this.props;
     const { todo } = this.state;
     const { id } = this.props.match && this.props.match.params;
@@ -206,11 +212,7 @@ class _Todo extends React.Component {
   }
 }
 
-_Todo.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-const Todo = props => {
+const _Todo = props => {
   const { classes, add, update, todo, open, message } = props;
   const { id } = props.match && props.match.params;
 

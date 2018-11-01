@@ -44,51 +44,52 @@ function App(props) {
 /**
  * Class approach
  */
-class _App extends Component {
-  state = {
-    drawerOpen: true
-  };
 
-  constructor(props) {
-    super(props);
-    this.appRef = React.createRef();
-  }
-  handleDrawerOpen = () => {
-    this.setState({ drawerOpen: true });
-  };
+// class _App extends Component {
+//   state = {
+//     drawerOpen: true
+//   };
 
-  handleDrawerClose = () => {
-    this.setState({ drawerOpen: false });
-  };
+//   constructor(props) {
+//     super(props);
+//     this.appRef = React.createRef();
+//   }
+//   handleDrawerOpen = () => {
+//     this.setState({ drawerOpen: true });
+//   };
 
-  render() {
-    const { classes } = this.props;
-    const { drawerOpen } = this.state;
+//   handleDrawerClose = () => {
+//     this.setState({ drawerOpen: false });
+//   };
 
-    return (
-      <div ref={this.appRef} className={classes.app}>
-        <CssBaseline />
-        <ErrorBoundary>
-          <Router>
-            <React.Fragment>
-              <Header
-                handleDrawerClose={this.handleDrawerClose}
-                handleDrawerOpen={this.handleDrawerOpen}
-                open={drawerOpen}
-              />
-              <Switch>
-                <Route exact path="/" component={Dashboard} />
-                <Route exact path="/create" component={Todo} />
-                <Route path="/todo/:id" component={Todo} />
-                <Route component={NoMatch} />
-              </Switch>
-            </React.Fragment>
-          </Router>
-        </ErrorBoundary>
-      </div>
-    );
-  }
-}
+//   render() {
+//     const { classes } = this.props;
+//     const { drawerOpen } = this.state;
+
+//     return (
+//       <div ref={this.appRef} className={classes.app}>
+//         <CssBaseline />
+//         <ErrorBoundary>
+//           <Router>
+//             <React.Fragment>
+//               <Header
+//                 handleDrawerClose={this.handleDrawerClose}
+//                 handleDrawerOpen={this.handleDrawerOpen}
+//                 open={drawerOpen}
+//               />
+//               <Switch>
+//                 <Route exact path="/" component={Dashboard} />
+//                 <Route exact path="/create" component={Todo} />
+//                 <Route path="/todo/:id" component={Todo} />
+//                 <Route component={NoMatch} />
+//               </Switch>
+//             </React.Fragment>
+//           </Router>
+//         </ErrorBoundary>
+//       </div>
+//     );
+//   }
+// }
 
 const styles = theme => ({
   app: {

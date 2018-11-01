@@ -76,6 +76,10 @@ const TodosList = props => {
     handleSelectAll
   } = props;
 
+  const {
+    history: { push }
+  } = props;
+
   return (
     <Paper elevation={2} square className={classes.container}>
       <PaperHeader>
@@ -105,7 +109,7 @@ const TodosList = props => {
                 return (
                   todo && (
                     <TodosListItem
-                      handleNavigation={id => props.history.push(`/todo/${id}`)}
+                      handleNavigation={id => push(`/todo/${id}`)}
                       handleToggle={handleToggle}
                       key={`todo-${idx}`}
                       todo={todo}
