@@ -14,6 +14,12 @@ const withMessages = Component =>
       });
     };
 
+    clearMessages = () => {
+      this.setState({
+        messages: []
+      });
+    };
+
     render() {
       const { messages } = this.state;
 
@@ -21,6 +27,7 @@ const withMessages = Component =>
         <Component
           {...this.props}
           addMessage={this.addMessage}
+          clearMessages={this.clearMessages}
           messages={messages}
         />
       );
