@@ -19,7 +19,7 @@ import { merge } from "ramda";
 import Loader from "@material-ui/core/CircularProgress";
 
 class Todo extends React.Component {
-  //TODO: use useState
+  //TODO: use useState hook
   state = {
     needSave: false,
     isDirty: false,
@@ -69,14 +69,13 @@ class Todo extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    console.log("Todo updated");
     if (
       this.props.loading === false &&
       this.props.loading !== prevProps.loading
     ) {
       this.setState({
         notifierOpen: true,
-        notifierMessage: "Todo loaded"
+        notifierMessage: "todo loaded!"
       });
     }
 
@@ -86,9 +85,9 @@ class Todo extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Todo mounted");
+    console.info("Todo mounted");
     const { id } = this.props.match && this.props.match.params;
-    console.log(this.props.match);
+
     if (id) {
       this.props.load(id);
     }
