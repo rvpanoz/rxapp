@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import styles from "./styles";
-import { TodoList } from "components/todos";
+import TodoList from "components/todos/TodoListHooks";
 
 class Dashboard extends Component {
   render() {

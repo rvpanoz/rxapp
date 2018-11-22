@@ -1,15 +1,15 @@
 import "babel-polyfill";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import { StoreProvider } from "redux-react-hook";
 import App from "components";
 import configureStore from "store/configureStore";
 
 const store = configureStore();
 
 ReactDOM.render(
-  <Provider store={store}>
+  <StoreProvider value={store}>
     <App />
-  </Provider>,
+  </StoreProvider>,
   document.getElementById("root")
 );
